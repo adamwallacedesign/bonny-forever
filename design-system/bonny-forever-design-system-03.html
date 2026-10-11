@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bonny Forever — Design System 03</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,100;1,9..144,300..700,100&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="design-system.css">
+</head>
+<body>
+
+<!-- ============ COVER — the white mark over photography ============ -->
+<header class="cover">
+  <div class="bg"><img src="images/ceremony-urns-columns.jpg" alt="Floral urns and columns against a plaster wall"></div>
+  <div class="masthead">
+    <span>Design System</span>
+    <span>Bonny Forever Floral Design</span>
+    <span>Exploration 03</span>
+  </div>
+  <div class="cover-body">
+    <img class="cover-logo rv in" src="images/logo-white.png" alt="Bonny Forever Floral Design — white logo">
+    <p class="rv in">The third pass. The new palette — sage, grape, wisteria and dusty rose — with the white mark sitting directly on photography for the first time.</p>
+  </div>
+  <div class="cover-foot"><span>Scroll</span></div>
+</header>
+
+<!-- ============ WHAT CHANGED ============ -->
+<section class="changed">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow">What changed</span>
+      <h2 class="sec-title">Softer to read, <em>wider to work with</em></h2>
+    </div>
+    <div class="two-col rv">
+      <div>
+        <p class="body-copy">Exploration 02's structure stays — the editorial rules, the square corners, the full-bleed photography. What's gone is the fussiness: the tiny folio numbers, the figure labels, the dense letterspaced captions. The page furniture now does its job and gets out of the way.</p>
+        <p class="body-copy">Body text is bigger, a touch heavier, and set with more air. Everything meant to be read runs in a single comfortable column. If a paragraph needs effort, it's been rewritten.</p>
+      </div>
+      <div>
+        <p class="body-copy">The colour world opens right up. Green stops being the whole story: the new palette pairs sage with a deep vintage grape, a soft wisteria blue and a dusty rose. Grape takes over the working jobs — text, buttons, dark sections — because it's the only one of the four dark enough to hold white type. The other three do what flowers do: bring the colour.</p>
+        <p class="body-copy">And the white logo finally gets its moment, sitting straight on photography — which is almost certainly how the real website will open.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COLOUR ============ -->
+<section class="colour">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow">Colour</span>
+      <h2 class="sec-title">Four flowers, one stem</h2>
+      <p class="lede">The four palette colours read like an arrangement — foliage, something deep, something blue, something blush. Grape is the stem that holds them together.</p>
+    </div>
+    <div class="swatches rv">
+      <div class="swatch">
+        <div class="chip" style="background:var(--sage)"></div>
+        <div class="info"><h4>Sage Green</h4><div class="hex">#84A37B</div><p>Feature panels, tags and tints. The foliage of the palette.</p></div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background:var(--grape)"></div>
+        <div class="info"><h4>Vintage Grape</h4><div class="hex">#564256</div><p>The working colour. Buttons, headings, dark sections, photo overlays.</p></div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background:var(--wisteria)"></div>
+        <div class="info"><h4>Wisteria Blue</h4><div class="hex">#92AEDD</div><p>Highlight panels, and the accent colour on grape surfaces.</p></div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background:var(--rose)"></div>
+        <div class="info"><h4>Dusty Rose</h4><div class="hex">#CC7E85</div><p>The warm accent — link underlines, italic moments, small marks.</p></div>
+      </div>
+    </div>
+    <div class="support-row rv">
+      <div class="swatch">
+        <div class="chip" style="background:var(--paper)"></div>
+        <div class="info"><h4>Paper</h4><div class="hex">#F7F3F2</div><p>The background everything sits on.</p></div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background:var(--ink)"></div>
+        <div class="info"><h4>Ink</h4><div class="hex">#342A38</div><p>Body text — grape, deepened until it reads as near-black.</p></div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background:linear-gradient(90deg,var(--sage-tint) 50%,var(--wist-tint) 50%)"></div>
+        <div class="info"><h4>Tints</h4><div class="hex">#EBF0E7 · #E9EEF8</div><p>Sage and wisteria washed right back, for quiet section panels.</p></div>
+      </div>
+    </div>
+    <div class="rv">
+      <h5 class="label">Rough proportions on any given page</h5>
+      <div class="ratio">
+        <div style="flex:5;background:var(--paper);color:var(--ink)">Paper 50%</div>
+        <div style="flex:2.2;background:#fff;color:var(--ink);border-left:var(--rule);border-right:var(--rule)">Photo 22%</div>
+        <div style="flex:1.4;background:var(--grape);color:#fff">Grape 14%</div>
+        <div style="flex:.6;background:var(--sage)"></div>
+        <div style="flex:.5;background:var(--wisteria)"></div>
+        <div style="flex:.3;background:var(--rose)"></div>
+      </div>
+    </div>
+    <div class="colour-note rv">
+      <div>
+        <h5 class="label">Why grape does the work</h5>
+        <p>Sage, wisteria and dusty rose are all mid-tones — lovely as surfaces, but none can hold white text at button size. Grape can, comfortably. So it carries every action and heading, and the three softer colours stay decorative, which is exactly the role that suits them.</p>
+      </div>
+      <div>
+        <h5 class="label">Keeping it from going pastel</h5>
+        <p>Four soft colours together can drift towards nursery-wallpaper. The guard rails: never more than two of the mid-tones on screen at once, always anchored by grape or a photograph, and the tint versions doing most of the day-to-day work while the full-strength colours appear in deliberate blocks.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FULL-BLEED — white mark in use ============ -->
+<section class="bleed">
+  <div class="bg"><img src="images/florist-at-work.jpg" alt="Florist working on a large installation"></div>
+  <div class="inner rv">
+    <div class="wrap">
+      <img class="mark" src="images/logo-white.png" alt="Bonny Forever white logo over photography">
+      <p class="cap">The white mark sits on photography only over calm areas, always with a grape scrim behind it — never across faces or busy blooms.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TYPE ============ -->
+<section class="type">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow">Typography</span>
+      <h2 class="sec-title" style="color:var(--paper)">Set to be read, <em>not decoded</em></h2>
+      <p class="lede" style="opacity:.92">Fraunces and Jost carry over — they're the constant across all three explorations. The change is in the setting: bigger body sizes, longer line heights, plainer captions, and far fewer of the small tracked-out labels.</p>
+    </div>
+    <div class="specimen rv">
+      <div class="spec-row">
+        <div class="meta">Display<br>Fraunces 430</div>
+        <div class="sp-display">Grown to <em>stay</em></div>
+      </div>
+      <div class="spec-row">
+        <div class="meta">Heading<br>Fraunces 420</div>
+        <div class="sp-h2">One scheme for the wedding, another for the wine bar</div>
+      </div>
+      <div class="spec-row">
+        <div class="meta">Body<br>Jost 400 · 17px<br>Line height 1.75</div>
+        <div class="sp-body">This is the new default reading size. A little larger, a little heavier, and given room to breathe — the difference between copy that gets skimmed and copy that gets read. Nothing meant to be read is ever set smaller than this except captions.</div>
+      </div>
+      <div class="spec-row" style="border-bottom:none">
+        <div class="meta">Caption<br>Jost 400 · 13.5px</div>
+        <div class="sp-caption">Ceremony columns in garden rose and wax flower, set the day before at The Old Rectory.</div>
+      </div>
+    </div>
+    <div class="type-note rv">
+      <div>
+        <h5>What got cut</h5>
+        <p>Folio numbers, figure labels, vertical scroll hints, and most of the wide-tracked micro-caps. Labels still exist — sections and cards need them — but tracking is tighter, sizes are up a point, and there are simply fewer of them per screen.</p>
+      </div>
+      <div>
+        <h5>The italic finds a new partner</h5>
+        <p>The single italic flourish per headline continues, now in dusty rose on light surfaces and wisteria on grape. Same discipline as ever: one phrase, never a whole line.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PHOTOGRAPHY ============ -->
+<section class="art">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow">Photography</span>
+      <h2 class="sec-title">Straight crops, simple captions</h2>
+      <p class="lede">Same rules as before — natural light, real interiors, edge-to-edge or squared off. The captions just talk like a person now, without the numbering system.</p>
+    </div>
+    <div class="figgrid rv">
+      <div class="fig wide">
+        <div class="ph"><img src="images/seating-chart-easel.jpg" alt="Seating chart on easel with white florals"></div>
+        <div class="figcap">Welcome moments shot wide and in place — the florals meeting the venue's own tile, timber and glass.</div>
+      </div>
+      <div class="fig tall">
+        <div class="ph"><img src="images/bridal-bouquet.jpg" alt="Bouquet on a wooden table"></div>
+        <div class="figcap">Details keep their honest shadows. If it looks like a catalogue, reshoot it.</div>
+      </div>
+    </div>
+    <div class="art-note rv">
+      <div>
+        <h5 class="label">Overlays go grape</h5>
+        <p>Every photographic overlay is now grape rather than green or black — it flatters both the pinks and the foliage in the arrangements, and it's what lets the white logo sit on any image in the library without clashing.</p>
+      </div>
+      <div>
+        <h5 class="label">White mark rules</h5>
+        <p>Minimum width of about a quarter of the frame, clear space equal to the height of the flower cameo, and always over the calmest part of the image. If no calm area exists, the logo goes on a solid grape panel instead — never fighting the flowers for attention.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COMPONENTS ============ -->
+<section class="components">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow">Components</span>
+      <h2 class="sec-title">The working parts, third cut</h2>
+    </div>
+
+    <div class="comp-block rv">
+      <h5>Buttons — grape carries every action</h5>
+      <div class="btn-row">
+        <button class="btn primary">Enquire now</button>
+        <button class="btn ghost">View the collection</button>
+        <button class="btn-text">See real installations</button>
+      </div>
+    </div>
+
+    <div class="comp-block rv">
+      <h5>Navigation</h5>
+      <div class="navmock">
+        <span class="wordmark">Bonny Forever</span>
+        <nav>
+          <a href="#" class="on">Weddings</a>
+          <a href="#">Venue rental</a>
+          <a href="#">Collections</a>
+          <a href="#">Journal</a>
+        </nav>
+        <button class="btn primary" style="padding:12px 26px;font-size:12px">Enquire</button>
+      </div>
+    </div>
+
+    <div class="comp-block rv">
+      <h5>Tags — the mid-tones earn their keep</h5>
+      <div class="chips">
+        <span class="chip-el active">All</span>
+        <span class="chip-el c-sage">Foliage-led</span>
+        <span class="chip-el c-wist">Something blue</span>
+        <span class="chip-el">Tablescapes</span>
+        <span class="chip-el">For hire</span>
+      </div>
+    </div>
+
+    <div class="comp-block rv">
+      <h5>Colour panels — sage and wisteria as surfaces</h5>
+      <div class="panel-demo">
+        <div class="panel p-sage">
+          <h4>The rental library</h4>
+          <p>Seasonal schemes for restaurants, bars and hotels — swapped over quarterly, invoiced monthly, never watered once.</p>
+          <button class="btn">Browse for hire</button>
+        </div>
+        <div class="panel p-wist">
+          <h4>Something blue, kept forever</h4>
+          <p>Delphinium, wisteria and cornflower stems that hold their colour long after the honeymoon.</p>
+          <button class="btn">See the collection</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="comp-block rv" style="margin-bottom:0">
+      <h5>Service cards</h5>
+      <div class="card-row">
+        <div class="svc-card">
+          <div class="img"><img src="images/bridal-bouquet.jpg" alt="Bridal bouquet"></div>
+          <div class="body">
+            <span class="kicker k-rose">Weddings</span>
+            <h4>Bouquets &amp; personals</h4>
+            <p>Made months ahead, zero day-of stress, yours to keep long after the day.</p>
+            <span class="link">Explore</span>
+          </div>
+        </div>
+        <div class="svc-card">
+          <div class="img"><img src="images/ceremony-urns-columns.jpg" alt="Ceremony installation"></div>
+          <div class="body">
+            <span class="kicker k-rose">Weddings</span>
+            <h4>Ceremony &amp; installations</h4>
+            <p>Urns, columns and broken arches — built for the venue, set the day before.</p>
+            <span class="link">Explore</span>
+          </div>
+        </div>
+        <div class="svc-card">
+          <div class="img"><img src="images/restaurant-table.jpg" alt="Restaurant florals"></div>
+          <div class="body">
+            <span class="kicker k-sage">Trade</span>
+            <h4>Venue rental</h4>
+            <p>Rotating schemes for restaurants, bars and hotels. One monthly fee, no wilting.</p>
+            <span class="link">Explore</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HERO MOCK ============ -->
+<section class="heromock">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow">Proof of concept</span>
+      <h2 class="sec-title">The homepage, in this direction</h2>
+    </div>
+    <div class="mockframe rv">
+      <div class="mock-hero">
+        <div class="bg"><img src="images/seating-chart-easel.jpg" alt="Wedding welcome area with florals"></div>
+        <div class="mock-nav">
+          <img class="mark" src="images/logo-white.png" alt="Bonny Forever">
+          <nav><span>Weddings</span><span>Venue rental</span><span>Collections</span><span>Journal</span></nav>
+          <span class="cta">Enquire</span>
+        </div>
+        <div class="mock-body">
+          <div>
+            <h2>Flowers for the day. <em>And every day after.</em></h2>
+            <p>Hand-built faux florals for weddings, restaurants and venues — designed to photograph like fresh, made to last forever.</p>
+            <div class="btns">
+              <button class="btn-light">Plan your wedding flowers</button>
+              <button class="btn-out">For venues</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mock-strip">
+        <span><i></i>Keep your bouquet forever</span>
+        <span><i></i>Set up the day before</span>
+        <span><i></i>No seasonal limits</span>
+        <span><i></i>Rental for hospitality</span>
+      </div>
+    </div>
+    <p class="mock-caption rv">Indicative only — the white mark, grape overlay and new palette pressure-tested in a real hero.</p>
+  </div>
+</section>
+
+<!-- ============ VERDICT ============ -->
+<section class="verdict">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow">An honest read</span>
+      <h2 class="sec-title" style="color:var(--paper)">Where this lands, <em>and one caution</em></h2>
+    </div>
+    <div class="rv">
+      <p>This is the most versatile of the three directions. Grape gives the brand a grown-up backbone the moss never quite had, the four colours map neatly onto real floral palettes, and the white mark over photography is genuinely strong — that cover treatment could ship as the website hero almost as-is.</p>
+      <p>The one caution: this palette has drifted a long way from the logo's crimson-on-pink. The white and any future ink-dark versions of the mark work beautifully here, but the original pink lockup would now feel like a visitor from another brand. Worth a deliberate decision with the designer — either the logo colourways evolve toward this palette, or dusty rose gets promoted enough to bridge back to it. Not a problem, but a choice that shouldn't be made by accident.</p>
+      <ul class="next-list">
+        <li data-n="01">React to all three explorations side by side and pick the spine — my money is on this one's palette with 02's photography rules.</li>
+        <li data-n="02">Settle the logo question: evolve the colourways, or keep crimson-on-pink as a deliberate packaging-only signature.</li>
+        <li data-n="03">Lock the tokens and build the real homepage from them.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>Bonny Forever Floral Design</span>
+    <span>Exploration 03 · 2026</span>
+  </div>
+</footer>
+
+<script src="design-system.js"></script>
+</body>
+</html>
