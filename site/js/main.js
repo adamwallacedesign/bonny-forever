@@ -1,6 +1,28 @@
-/* Bonny Forever site scripts, loaded by index.html and weddings.html.
-   Moved from inline code unchanged, except that each block now checks its
-   elements exist so the same file can load on both pages. */
+/* Bonny Forever site scripts, loaded by every page in site/.
+   Each block checks its elements exist, so the same file can load on all pages. */
+
+/* Mobile menu (all pages). The toggle button is only visible below the nav breakpoint:
+   992px in styles.css, 800px in commercial.css (see "MOBILE MENU" in each). */
+(function(){
+  var btn=document.querySelector('.nav-toggle');
+  if(!btn)return;
+  var header=btn.closest('header');
+  var nav=document.getElementById(btn.getAttribute('aria-controls'));
+  function isOpen(){ return btn.getAttribute('aria-expanded')==='true'; }
+  function setOpen(open){
+    header.classList.toggle('nav-open',open);
+    btn.setAttribute('aria-expanded',open?'true':'false');
+  }
+  btn.addEventListener('click',function(){ setOpen(!isOpen()); });
+  // Close when a menu link is tapped
+  nav.addEventListener('click',function(e){ if(e.target.closest('a'))setOpen(false); });
+  // Close when tapping anywhere outside the header
+  document.addEventListener('click',function(e){ if(isOpen()&&!header.contains(e.target))setOpen(false); });
+  // Close on Escape and put keyboard focus back on the button
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&isOpen()){ setOpen(false); btn.focus(); } });
+  // Reset if the window is widened past the breakpoint while the menu is open
+  window.addEventListener('resize',function(){ if(isOpen()&&getComputedStyle(btn).display==='none')setOpen(false); });
+})();
 
 /* Enquiry form (index.html). Was an inline onsubmit="" attribute.
    NOTE: shows a thank-you message but does not send the enquiry anywhere yet. */
