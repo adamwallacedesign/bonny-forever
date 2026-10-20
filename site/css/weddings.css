@@ -1,39 +1,58 @@
-/* weddings.html only: Bonny Signature tiles, add-on cards and photo lightbox. Moved from inline <style>, unchanged. */
+/* weddings.html only: Bonny Signature package cards, "The look" layout and the photo lightbox.
+   Shared pieces (offer panel, price list, FAQ accordion, closing band) live in styles.css. */
 
-.sig-box{background:var(--paper);border:var(--rule);border-radius:24px;padding:44px;margin-bottom:40px}
-.sig-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:32px}
-.sig-top h3{font-size:clamp(30px,4vw,44px);color:var(--ink)}
-.sig-top h3 em{color:var(--rose);font-style:italic}
-.sig-top p{max-width:62ch;margin-top:10px;opacity:.88}
-.sig-price{text-align:right}
-.sig-price .package-price{font-size:28px;margin:0 0 10px}
+/* BONNY SIGNATURE PACKAGE */
+.sig-box{background:var(--paper);border:var(--rule);border-radius:24px;padding:44px}
+.package-price-line{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;margin-bottom:28px}
+.package-price-line .package-price{font-size:30px;margin:0}
+.package-price-line small{font-size:14px;color:var(--ink);opacity:.75}
 .sig-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
 .sig-tile{all:unset;cursor:pointer;display:flex;flex-direction:column;background:#fff;border:var(--rule);border-radius:20px;overflow:hidden;transition:transform .25s,box-shadow .25s}
 .sig-tile:hover,.sig-tile:focus-visible{transform:translateY(-5px);box-shadow:0 18px 40px -16px rgba(52,42,56,.3)}
+.sig-tile:focus-visible{outline:2px solid var(--grape);outline-offset:3px}
 .sig-photo{position:relative;display:block;aspect-ratio:4/5;overflow:hidden}
 .sig-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
 .sig-tile:hover .sig-photo img{transform:scale(1.05)}
 .sig-zoom{position:absolute;left:12px;bottom:12px;background:rgba(255,255,255,.94);color:var(--ink);border-radius:999px;padding:6px 14px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:600}
-.sig-label{display:flex;flex-direction:column;gap:2px;padding:18px 20px 20px}
-.sig-label strong{font-family:var(--disp);font-size:20px;font-weight:500;color:var(--ink)}
-.sig-label em{font-style:normal;font-size:13.5px;color:var(--grape)}
-.duo{display:grid;grid-template-columns:1fr 1fr;gap:32px}
-.duo .service-card{border-radius:24px;overflow:hidden}
-.duo{align-items:stretch}.duo .service-card{display:flex;flex-direction:column}.duo .service-img{aspect-ratio:8/7;flex-shrink:0;overflow:hidden;background:none}.duo .service-img img{width:100%;height:100%;display:block;object-fit:cover;object-position:center 40%}.duo .service-body{flex:1;display:flex;flex-direction:column}.duo .service-body .btn{margin-top:auto!important;align-self:flex-start}
-.pkg-list{list-style:none;font-size:14.5px;line-height:1.7;opacity:.9;margin:4px 0 12px}
-.pkg-list li{margin-bottom:6px}
+.sig-label{display:block;padding:18px 20px 20px;font-family:var(--disp);font-size:19px;font-weight:500;line-height:1.3;color:var(--ink)}
+/* "Delivery, setup and collection": the fifth package item, which has no photo */
+.sig-included{display:flex;align-items:center;gap:12px;margin-top:22px;padding:18px 20px;background:#fff;border:var(--rule);border-radius:20px;font-family:var(--disp);font-size:19px;font-weight:500;color:var(--ink)}
+.sig-included i{flex:none;width:8px;height:8px;border-radius:50%;background:var(--rose)}
+.sig-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px 32px;margin-top:32px}
+.sig-foot p{max-width:58ch;opacity:.88}
+
+/* THE LOOK + PLANNING YOUR DAY TOGETHER (two text blocks beside one photo) */
+.look-block + .look-block{margin-top:56px}
+.look-block .sec-head{margin-bottom:24px}
+.look-section .story-img img{aspect-ratio:1}
+
+/* LIGHTBOX */
 #lb{position:fixed;inset:0;z-index:2000;background:rgba(30,22,32,.88);display:none;align-items:center;justify-content:center;padding:24px}
 #lb.open{display:flex}
 .lb-inner{background:transparent;max-width:92vw;max-height:92vh;display:flex;flex-direction:column;align-items:center;position:relative}
 .lb-head{position:absolute;top:10px;right:10px;z-index:3}
-.lb-head h4{display:none}
 .lb-btn{border:none;background:rgba(255,255,255,.92);color:var(--ink);border-radius:999px;width:42px;height:42px;font-size:20px;cursor:pointer;line-height:1}
 .lb-btn:hover{background:var(--grape);color:#fff}
+.lb-btn:focus-visible{outline:2px solid var(--wisteria);outline-offset:2px}
 .lb-stage{position:relative;display:flex;align-items:center;justify-content:center;background:transparent}
 .lb-stage img{max-width:92vw;max-height:88vh;display:block;object-fit:contain;border-radius:16px}
-.lb-prev,.lb-next{position:absolute;top:50%;transform:translateY(-50%)}
+#lb.multi .lb-stage img{max-height:calc(88vh - 76px)} /* leave room for the thumbnails */
+.lb-prev,.lb-next{position:absolute;top:50%;transform:translateY(-50%);z-index:2}
 .lb-prev{left:14px} .lb-next{right:14px}
 .lb-thumbs{display:flex;gap:10px;padding:12px 0 0;overflow-x:auto;justify-content:center}
-.lb-thumbs img{height:58px;width:58px;object-fit:cover;border-radius:12px;cursor:pointer;opacity:.55;border:2px solid transparent}
-.lb-thumbs img.on{opacity:1;border-color:var(--rose)}
-@media(max-width:992px){.sig-grid{grid-template-columns:repeat(2,1fr)}.duo{grid-template-columns:1fr}.sig-box{padding:26px}.sig-price{text-align:left}}
+.lb-thumbs button{all:unset;cursor:pointer;border-radius:12px;border:2px solid transparent;opacity:.55;line-height:0}
+.lb-thumbs button.on{opacity:1;border-color:var(--rose)}
+.lb-thumbs button:focus-visible{outline:2px solid var(--wisteria);outline-offset:2px}
+.lb-thumbs img{height:58px;width:58px;object-fit:cover;border-radius:10px;display:block}
+
+.sig-label,.sig-included{overflow-wrap:break-word}
+.sig-zoom{white-space:nowrap}
+@media(max-width:992px){.sig-grid{grid-template-columns:repeat(2,1fr)}.sig-box{padding:26px}.look-section .story-img{max-width:520px}}
+@media(max-width:560px){
+  .sig-box{padding:18px 16px}
+  .sig-grid{gap:12px}
+  .sig-label{padding:12px 12px 14px;font-size:15.5px}
+  .sig-zoom{left:8px;bottom:8px;padding:5px 10px;font-size:9.5px;letter-spacing:.1em}
+  .sig-included{padding:14px 14px;font-size:16px}
+  .package-price-line .package-price{font-size:26px}
+}

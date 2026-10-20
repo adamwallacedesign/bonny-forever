@@ -479,13 +479,6 @@ nav.main-nav a.btn-nav:hover {
   flex: 1;
   border-top: var(--rule);
 }
-.service-kicker {
-  font-size: 11px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  font-weight: 600;
-  color: var(--rose);
-}
 .service-body h3 { font-size: 24px; color: var(--ink); }
 .service-body p {
   font-size: 15px;
@@ -681,8 +674,7 @@ footer.site-footer {
   gap: 48px;
   margin-bottom: 48px;
 }
-.footer-brand h2,
-.footer-brand h3 {
+.footer-brand h2 {
   font-size: 26px;
   margin-bottom: 12px;
 }
@@ -691,13 +683,6 @@ footer.site-footer {
   font-weight: 300;
   max-width: 36ch;
   color: var(--wist-tint);
-}
-.footer-links h5 {
-  font-size: 11.5px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--wisteria);
-  margin-bottom: 18px;
 }
 .footer-links ul { list-style: none; }
 .footer-links li { margin-bottom: 10px; font-size: 14px; color: var(--wist-tint); }
@@ -719,8 +704,133 @@ footer.site-footer {
   color: var(--wisteria);
 }
 
+/* ===== SHARED COMPONENTS (used by Weddings and Business) ===== */
+
+/* Shorter hero for inner pages */
+.hero.hero-short { min-height: 26vh; }
+
+/* Story layout with the photo on the left (desktop only) */
+.story-grid.photo-left { grid-template-columns: 0.9fr 1.1fr; }
+.story-grid.photo-left .story-img { order: -1; }
+
+/* OFFER PANEL (Weddings and Business #offer): soft coloured panel under the hero */
+.offer-section { padding: 64px 0; }
+.offer-panel {
+  background: var(--rose-tint);
+  border: 1px solid rgba(204, 126, 133, 0.35);
+  border-radius: 24px;
+  padding: 40px 44px;
+}
+.offer-panel h2 {
+  font-size: clamp(26px, 3.2vw, 38px);
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+/* grape rather than rose: rose on the pink tint is too low-contrast to read */
+.offer-panel h2 em { font-style: italic; font-weight: 340; color: var(--grape); }
+.offer-panel p { max-width: 70ch; font-size: 17px; line-height: 1.7; opacity: 0.92; }
+
+/* PRICE LIST (Weddings add-ons): photo, item, price */
+.price-list { list-style: none; border-top: var(--rule); margin-bottom: 28px; }
+.price-row {
+  display: grid;
+  grid-template-columns: 80px 1fr auto;
+  gap: 24px;
+  align-items: center;
+  padding: 18px 0;
+  border-bottom: var(--rule);
+}
+.price-item { font-size: 16.5px; color: var(--ink); }
+.price-cost {
+  font-family: var(--disp);
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--grape);
+  text-align: right;
+}
+.price-note { max-width: 70ch; margin-bottom: 14px; opacity: 0.9; }
+.price-note:last-of-type { margin-bottom: 28px; }
+
+/* PHOTO PLACEHOLDER: marks where a supplied photo will go. Swap for an <img> when it arrives. */
+.photo-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  text-align: center;
+  background: repeating-linear-gradient(135deg, var(--sage-tint) 0 10px, #E1E9DC 10px 20px);
+  border: 1.5px dashed var(--sage);
+  border-radius: 12px;
+  color: #4C6644;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+.photo-placeholder small { font-size: 11px; font-weight: 500; letter-spacing: 0.04em; text-transform: none; }
+.price-thumb { width: 80px; height: 80px; padding: 6px; font-size: 8.5px; letter-spacing: 0.1em; }
+.price-thumb small { font-size: 9.5px; }
+
+/* FAQ ACCORDION: native <details>/<summary>, so keyboard (Tab, Enter/Space) and
+   screen-reader support are built in, and it works without JavaScript */
+.faq-list { border-top: var(--rule); max-width: 860px; }
+.faq-item { border-bottom: var(--rule); }
+.faq-item summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 22px 0;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary h3 { font-size: 21px; color: var(--ink); transition: color 0.2s; }
+.faq-item summary:hover h3 { color: var(--grape); }
+.faq-item summary:focus-visible { outline: 2px solid var(--grape); outline-offset: 4px; border-radius: 6px; }
+.faq-icon {
+  flex: none;
+  position: relative;
+  width: 30px;
+  height: 30px;
+  border: 1px solid rgba(52, 42, 56, 0.3);
+  border-radius: 50%;
+}
+.faq-icon::before,
+.faq-icon::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 11px;
+  height: 1.5px;
+  background: var(--rose);
+  transform: translate(-50%, -50%);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.faq-icon::after { transform: translate(-50%, -50%) rotate(90deg); }
+.faq-item[open] .faq-icon::after { transform: translate(-50%, -50%) rotate(0deg); }
+.faq-a { padding: 0 54px 24px 0; }
+.faq-a p { font-size: 16px; line-height: 1.75; opacity: 0.88; max-width: 70ch; }
+@media (prefers-reduced-motion: no-preference) {
+  .faq-item[open] .faq-a { animation: faq-open 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+}
+@keyframes faq-open { from { opacity: 0; transform: translateY(-6px); } }
+
+/* CLOSING CALL TO ACTION (dark band at the end of Weddings and Business) */
+.cta-band { background: var(--grape); color: var(--paper); padding: 80px 0; text-align: center; }
+.cta-band h2.sec-title { margin-bottom: 16px; }
+.cta-band p { max-width: 52ch; margin: 0 auto 28px; font-size: 18px; font-weight: 300; color: var(--wist-tint); }
+
 /* RESPONSIVE */
 @media (max-width: 992px) {
+  .story-grid.photo-left { grid-template-columns: 1fr; }
+  .story-grid.photo-left .story-img { order: 0; }
+  .offer-section { padding: 48px 0; }
+  .offer-panel { padding: 28px 26px; }
   section { padding: 70px 0; }
   .story-grid, .why-grid, .contact-grid, .footer-grid {
     grid-template-columns: 1fr;
@@ -740,4 +850,9 @@ footer.site-footer {
   .trust-inner { grid-template-columns: 1fr; gap: 12px; }
   .offer-banner { font-size: 12.5px; padding: 9px 20px; }
   .footer-bottom { flex-direction: column; gap: 8px; }
+  .price-row { grid-template-columns: 64px 1fr; gap: 6px 16px; }
+  .price-thumb { width: 64px; height: 64px; grid-row: span 2; font-size: 7.5px; }
+  .price-cost { text-align: left; font-size: 18px; }
+  .faq-a { padding-right: 0; }
+  .faq-item summary h3 { font-size: 19px; }
 }

@@ -47,22 +47,55 @@
   }
 })();
 
-/* Bonny Signature photo lightbox (weddings.html). Was an inline <script>. */
+/* Bonny Signature photo lightbox (weddings.html). Each .sig-tile opens its own photo; a tile
+   can add one more with data-extra-src and data-extra-alt (the floral arch does). The large
+   <img> is only created when a photo opens, so the page never holds an empty image, and
+   every photo and thumbnail carries real alt text. */
 (function(){
-  var lb=document.getElementById('lb'),img=document.getElementById('lbImg'),th=document.getElementById('lbThumbs'),ti=document.getElementById('lbTitle'),srcs=[],i=0;
+  var lb=document.getElementById('lb');
   if(!lb)return; // lightbox only exists on weddings.html
-  function show(n){i=(n+srcs.length)%srcs.length;img.src=srcs[i];img.alt=ti.textContent;Array.prototype.forEach.call(th.children,function(t,k){t.className=k===i?'on':''});
-    var m=srcs.length<2;document.getElementById('lbPrev').style.display=document.getElementById('lbNext').style.display=m?'none':'';th.style.display=m?'none':'';}
-  function close(){lb.className='';document.body.style.overflow=''}
-  document.querySelectorAll('.sig-tile').forEach(function(t){t.addEventListener('click',function(){
-    srcs=[t.querySelector('.sig-photo img').src];
-    t.querySelectorAll('[data-extra]').forEach(function(e){srcs.push(e.src)});
-    ti.textContent=t.getAttribute('data-title');th.innerHTML='';
-    srcs.forEach(function(s,k){var e=document.createElement('img');e.src=s;e.alt='';e.onclick=function(){show(k)};th.appendChild(e)});
-    lb.className='open';document.body.style.overflow='hidden';show(0);})});
-  document.getElementById('lbClose').onclick=close;
-  document.getElementById('lbPrev').onclick=function(){show(i-1)};
-  document.getElementById('lbNext').onclick=function(){show(i+1)};
-  lb.addEventListener('click',function(e){if(e.target===lb)close()});
-  document.addEventListener('keydown',function(e){if(lb.className!=='open')return;if(e.key==='Escape')close();if(e.key==='ArrowLeft')show(i-1);if(e.key==='ArrowRight')show(i+1)});
+  var stage=lb.querySelector('.lb-stage'), thumbs=document.getElementById('lbThumbs');
+  var prev=document.getElementById('lbPrev'), next=document.getElementById('lbNext'), closeBtn=document.getElementById('lbClose');
+  var img=null, photos=[], i=0, opener=null;
+
+  function show(n){
+    i=(n+photos.length)%photos.length;
+    if(!img){ img=document.createElement('img'); stage.insertBefore(img,next); }
+    img.src=photos[i].src; img.alt=photos[i].alt;
+    Array.prototype.forEach.call(thumbs.children,function(b,k){
+      b.className=k===i?'on':''; b.setAttribute('aria-pressed',k===i?'true':'false');
+    });
+    var single=photos.length<2; // one photo: hide arrows and thumbnails
+    prev.style.display=next.style.display=thumbs.style.display=single?'none':'';
+    lb.classList.toggle('multi',!single);
+  }
+  function open(tile){
+    var main=tile.querySelector('.sig-photo img');
+    photos=[{src:main.currentSrc||main.src, alt:main.alt}];
+    if(tile.dataset.extraSrc) photos.push({src:tile.dataset.extraSrc, alt:tile.dataset.extraAlt});
+    thumbs.innerHTML='';
+    photos.forEach(function(p,k){
+      var b=document.createElement('button'), t=document.createElement('img');
+      b.type='button'; t.src=p.src; t.alt=p.alt; b.appendChild(t);
+      b.addEventListener('click',function(){ show(k); });
+      thumbs.appendChild(b);
+    });
+    opener=tile; lb.classList.add('open'); document.body.style.overflow='hidden';
+    show(0); closeBtn.focus();
+  }
+  function close(){
+    lb.classList.remove('open'); document.body.style.overflow='';
+    if(opener) opener.focus(); // back to the photo that was opened
+  }
+  document.querySelectorAll('.sig-tile').forEach(function(t){ t.addEventListener('click',function(){ open(t); }); });
+  closeBtn.addEventListener('click',close);
+  prev.addEventListener('click',function(){ show(i-1); });
+  next.addEventListener('click',function(){ show(i+1); });
+  lb.addEventListener('click',function(e){ if(e.target===lb) close(); });
+  document.addEventListener('keydown',function(e){
+    if(!lb.classList.contains('open'))return;
+    if(e.key==='Escape')close();
+    if(e.key==='ArrowLeft')show(i-1);
+    if(e.key==='ArrowRight')show(i+1);
+  });
 })();
