@@ -1,8 +1,8 @@
 /* Bonny Forever site scripts, loaded by every page in site/.
    Each block checks its elements exist, so the same file can load on all pages. */
 
-/* Mobile menu (all pages). The toggle button is only visible below the nav breakpoint:
-   992px in styles.css, 800px in commercial.css (see "MOBILE MENU" in each). */
+/* Mobile menu (all pages). The toggle button is only visible at 992px and below
+   (see "MOBILE MENU" in styles.css). */
 (function(){
   var btn=document.querySelector('.nav-toggle');
   if(!btn)return;

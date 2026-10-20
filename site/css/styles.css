@@ -1,4 +1,5 @@
-/* Shared styles for index.html and weddings.html. Moved from inline <style>, unchanged. */
+/* Shared styles for every page in site/ (index.html, weddings.html, commercial.html).
+   weddings.html also loads css/weddings.css for its package cards and lightbox. */
 
 :root {
   --grape: #564256;
@@ -316,7 +317,7 @@ nav.main-nav a.btn-nav:hover {
   padding-top: 78px;
   overflow: hidden;
 }
-.site-header + .hero { margin-top: -79px; }
+.site-header + main > .hero:first-child { margin-top: -79px; }
 .hero-bg {
   position: absolute;
   inset: 0;
@@ -820,6 +821,16 @@ footer.site-footer {
 }
 @keyframes faq-open { from { opacity: 0; transform: translateY(-6px); } }
 
+/* SERVICE CARDS (Business "Ways to work with me"): 2 x 2 on desktop, stacked on phones */
+.service-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; }
+.service-img .photo-placeholder { width: 100%; height: 100%; border-radius: 0; border-width: 0 0 1.5px; }
+
+/* Four points side by side in pairs, without a photo (Business "Why faux flowers") */
+.why-points.two-col { grid-template-columns: repeat(2, 1fr); gap: 32px 56px; margin-top: 0; }
+
+/* Four numbered steps (Business "How it works") */
+.process-grid.four { grid-template-columns: repeat(4, 1fr); gap: 28px; }
+
 /* CLOSING CALL TO ACTION (dark band at the end of Weddings and Business) */
 .cta-band { background: var(--grape); color: var(--paper); padding: 80px 0; text-align: center; }
 .cta-band h2.sec-title { margin-bottom: 16px; }
@@ -829,6 +840,7 @@ footer.site-footer {
 @media (max-width: 992px) {
   .story-grid.photo-left { grid-template-columns: 1fr; }
   .story-grid.photo-left .story-img { order: 0; }
+  .process-grid.four { grid-template-columns: repeat(2, 1fr); gap: 24px; }
   .offer-section { padding: 48px 0; }
   .offer-panel { padding: 28px 26px; }
   section { padding: 70px 0; }
@@ -850,6 +862,7 @@ footer.site-footer {
   .trust-inner { grid-template-columns: 1fr; gap: 12px; }
   .offer-banner { font-size: 12.5px; padding: 9px 20px; }
   .footer-bottom { flex-direction: column; gap: 8px; }
+  .service-grid, .why-points.two-col, .process-grid.four { grid-template-columns: 1fr; }
   .price-row { grid-template-columns: 64px 1fr; gap: 6px 16px; }
   .price-thumb { width: 64px; height: 64px; grid-row: span 2; font-size: 7.5px; }
   .price-cost { text-align: left; font-size: 18px; }
