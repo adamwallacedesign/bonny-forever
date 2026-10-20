@@ -23,7 +23,9 @@
 /* Images carry width/height attributes (to prevent layout shift); this stops the height
    attribute overriding CSS that only sets a width, e.g. .gallery-item img. */
 img { height: auto; }
-html { scroll-behavior: smooth; }
+/* scroll-padding-top: in-page links (#about, #faq...) land below the sticky header */
+html { scroll-behavior: smooth; scroll-padding-top: 79px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 body {
   font-family: var(--sans);
   font-weight: 400;
@@ -145,13 +147,47 @@ section { padding: 100px 0; }
   transition: color 0.2s;
 }
 .btn-link:hover { color: var(--rose); }
+/* The arrow is decoration only: the "/ ''" part stops screen readers announcing it */
+.btn-link::after { content: "\2192" / ""; margin-left: 0.6em; }
+.btn-block { width: 100%; }
+
+/* Inline text links (Instagram, email) */
+.text-link,
+.info-item a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--rose);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 4px;
+  transition: color 0.2s;
+}
+.text-link:hover,
+.info-item a:hover { color: var(--rose); }
+
+.section-white { background: var(--white); }
+
+/* OFFER BANNER (slim strip above the header; scrolls away, the header then sticks) */
+.offer-banner {
+  display: block;
+  background: var(--grape-dark);
+  color: var(--paper);
+  text-align: center;
+  font-size: 13.5px;
+  line-height: 1.5;
+  padding: 10px 32px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.offer-banner strong { font-weight: 600; }
+.offer-banner:hover { background: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+.offer-banner:focus-visible { outline: 2px solid var(--wisteria); outline-offset: -4px; }
 
 /* NAVIGATION */
+/* Sticky, not fixed, so the offer banner above it can scroll away. The hero is pulled up
+   79px (header height + border) so its photo still sits behind the translucent header. */
 header.site-header {
-  position: fixed;
+  position: sticky;
   top: 0;
-  left: 0;
-  right: 0;
   z-index: 999;
   background: rgba(247, 243, 242, 0.92);
   backdrop-filter: blur(12px);
@@ -171,13 +207,7 @@ header.site-header {
   text-decoration: none;
   color: var(--grape);
 }
-.brand-mark img { height: 42px; width: auto; display: block; }
-.brand-mark span {
-  font-family: var(--disp);
-  font-size: 21px;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-}
+.brand-mark img { height: 52px; width: auto; display: block; }
 nav.main-nav {
   display: flex;
   gap: 32px;
@@ -194,6 +224,14 @@ nav.main-nav a {
   padding: 6px 0;
 }
 nav.main-nav a:hover { color: var(--rose); }
+/* "Get in touch" button in the nav */
+nav.main-nav a.btn-nav,
+nav.main-nav a.btn-nav:hover {
+  padding: 10px 22px;
+  font-size: 11px;
+  border-radius: 24px;
+  color: #fff;
+}
 
 /* MOBILE MENU (992px and below; opened/closed by js/main.js) */
 .nav-toggle {
@@ -278,6 +316,7 @@ nav.main-nav a:hover { color: var(--rose); }
   padding-top: 78px;
   overflow: hidden;
 }
+.site-header + .hero { margin-top: -79px; }
 .hero-bg {
   position: absolute;
   inset: 0;
@@ -321,45 +360,26 @@ nav.main-nav a:hover { color: var(--rose); }
 }
 .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
 
-/* WEDDING SECTION HERO */
-.wedding-hero {
-  position: relative;
-  min-height: 72vh;
-  display: flex;
-  align-items: center;
-  color: #fff;
-  overflow: hidden;
-  padding: 0;
-}
-.wedding-hero .hero-content {
-  position: relative;
-  z-index: 2;
-  padding: 100px 0;
-  max-width: 680px;
-}
-.wedding-hero .hero-content .btn { margin-top: 4px; }
-
-
-/* TRUST STRIP */
+/* HIGHLIGHTS STRIP (four highlights under the Home hero) */
 .trust-strip {
   background: var(--grape);
   color: var(--paper);
-  padding: 18px 0;
+  padding: 22px 0;
   border-bottom: var(--rule);
 }
 .trust-inner {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 24px;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px 36px;
   font-size: 11.5px;
+  line-height: 1.6;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   font-weight: 500;
 }
-.trust-inner span { display: flex; align-items: center; gap: 10px; }
-.trust-inner i { width: 6px; height: 6px; border-radius: 50%; background: var(--rose); display: inline-block; }
+.trust-inner li { display: flex; align-items: flex-start; gap: 10px; }
+.trust-inner i { flex: none; width: 6px; height: 6px; margin-top: 0.55em; border-radius: 50%; background: var(--rose); display: inline-block; }
 
 /* STORY & ABOUT */
 .story-grid {
@@ -368,6 +388,9 @@ nav.main-nav a:hover { color: var(--rose); }
   gap: 64px;
   align-items: center;
 }
+.story-copy p { margin-bottom: 16px; color: var(--ink); opacity: 0.88; }
+.story-copy p.lead { margin-bottom: 20px; opacity: 0.92; }
+.story-copy p:last-of-type { margin-bottom: 28px; }
 .story-img {
   position: relative;
   border: var(--rule);
@@ -375,31 +398,12 @@ nav.main-nav a:hover { color: var(--rose); }
   overflow: hidden;
   box-shadow: 0 24px 60px -20px rgba(52,42,56,0.25);
 }
+.story-img.on-dark { border-color: rgba(255,255,255,0.2); }
 .story-img img {
   width: 100%;
   aspect-ratio: 4/5;
   object-fit: cover;
   display: block;
-}
-.story-badge {
-  position: absolute;
-  bottom: 24px;
-  right: 24px;
-  background: var(--grape);
-  color: var(--paper);
-  padding: 16px 22px;
-  font-size: 12px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  font-weight: 500;
-  border-radius: 12px;
-}
-
-/* SERVICES / WEDDINGS */
-.services-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
 }
 
 /* EXPLORE: WEDDINGS & COMMERCIAL SIDE BY SIDE */
@@ -499,18 +503,18 @@ nav.main-nav a:hover { color: var(--rose); }
   margin-top: 8px;
 }
 
-/* SUSTAINABILITY SECTION (DARK) */
-.sustainability {
+/* WHY FAUX FLOWERS (dark grape band: intro + points, optional photo) */
+.why-faux {
   background: var(--grape);
   color: var(--paper);
 }
-.sustain-grid {
+.why-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 64px;
   align-items: center;
 }
-.sustain-pillars {
+.why-points {
   display: grid;
   grid-template-columns: 1fr;
   gap: 24px;
@@ -520,7 +524,7 @@ nav.main-nav a:hover { color: var(--rose); }
   border-left: 2px solid var(--wisteria);
   padding-left: 20px;
 }
-.pillar h4 {
+.pillar h3 {
   font-size: 18px;
   color: var(--paper);
   margin-bottom: 6px;
@@ -538,7 +542,7 @@ nav.main-nav a:hover { color: var(--rose); }
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
 }
-.gallery-item {
+.gallery-frame {
   border: var(--rule);
   border-radius: 14px;
   overflow: hidden;
@@ -552,9 +556,18 @@ nav.main-nav a:hover { color: var(--rose); }
   transition: transform 0.5s ease;
 }
 .gallery-item:hover img { transform: scale(1.06); }
+.gallery-item figcaption {
+  margin-top: 12px;
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--ink);
+  opacity: 0.85;
+}
+.gallery-more { margin-top: 40px; font-size: 16px; }
 
-/* PROCESS / HOW IT WORKS */
+/* PROCESS / HOW IT WORKS (numbered steps) */
 .process-grid {
+  list-style: none;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 40px;
@@ -574,7 +587,7 @@ nav.main-nav a:hover { color: var(--rose); }
   line-height: 1;
   margin-bottom: 16px;
 }
-.process-step h4 { font-size: 20px; margin-bottom: 12px; color: var(--ink); }
+.process-step h3 { font-size: 20px; margin-bottom: 12px; color: var(--ink); }
 .process-step p { font-size: 14.5px; font-weight: 300; line-height: 1.65; opacity: 0.88; }
 
 /* CONTACT & BOOKING FORM */
@@ -587,6 +600,7 @@ nav.main-nav a:hover { color: var(--rose); }
   gap: 64px;
 }
 .contact-info {
+  list-style: none;
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -594,25 +608,9 @@ nav.main-nav a:hover { color: var(--rose); }
 .info-item {
   border-bottom: var(--rule);
   padding-bottom: 16px;
+  font-size: 16px;
+  color: var(--ink);
 }
-.info-item h5 {
-  font-size: 11.5px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  font-weight: 600;
-  color: var(--grape);
-  margin-bottom: 6px;
-}
-.info-item p { font-size: 16px; color: var(--ink); font-weight: 400; }
-.info-item a {
-  color: inherit;
-  text-decoration: underline;
-  text-decoration-color: var(--rose);
-  text-decoration-thickness: 1.5px;
-  text-underline-offset: 4px;
-  transition: color 0.2s;
-}
-.info-item a:hover { color: var(--rose); }
 
 /* FORM STYLING */
 .form-box {
@@ -668,6 +666,7 @@ nav.main-nav a:hover { color: var(--rose); }
   margin-top: 18px;
   font-size: 15px;
 }
+.form-success::before { content: "\2713" / ""; margin-right: 0.5em; }
 
 /* FOOTER */
 footer.site-footer {
@@ -682,6 +681,7 @@ footer.site-footer {
   gap: 48px;
   margin-bottom: 48px;
 }
+.footer-brand h2,
 .footer-brand h3 {
   font-size: 26px;
   margin-bottom: 12px;
@@ -700,7 +700,7 @@ footer.site-footer {
   margin-bottom: 18px;
 }
 .footer-links ul { list-style: none; }
-.footer-links li { margin-bottom: 10px; }
+.footer-links li { margin-bottom: 10px; font-size: 14px; color: var(--wist-tint); }
 .footer-links a {
   color: var(--paper);
   text-decoration: none;
@@ -722,16 +722,22 @@ footer.site-footer {
 /* RESPONSIVE */
 @media (max-width: 992px) {
   section { padding: 70px 0; }
-  .story-grid, .sustain-grid, .contact-grid, .footer-grid {
+  .story-grid, .why-grid, .contact-grid, .footer-grid {
     grid-template-columns: 1fr;
     gap: 40px;
   }
-  .services-grid, .process-grid {
+  .process-grid {
     grid-template-columns: 1fr;
     gap: 24px;
   }
   .gallery-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+  .trust-inner { grid-template-columns: repeat(2, 1fr); }
   .form-row { grid-template-columns: 1fr; gap: 0; }
+}
+@media (max-width: 560px) {
+  .trust-inner { grid-template-columns: 1fr; gap: 12px; }
+  .offer-banner { font-size: 12.5px; padding: 9px 20px; }
+  .footer-bottom { flex-direction: column; gap: 8px; }
 }

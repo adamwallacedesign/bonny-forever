@@ -34,6 +34,19 @@
   });
 })();
 
+/* Enquiry type pre-selection (index.html). Links such as index.html?enquiry=business#contact
+   choose the matching "What are you planning?" option (values: wedding, celebration,
+   business, other). Without ?enquiry= the dropdown stays on "Choose one". */
+(function(){
+  var select=document.getElementById('type');
+  if(!select)return;
+  var wanted=new URLSearchParams(window.location.search).get('enquiry');
+  if(!wanted)return;
+  for(var i=0;i<select.options.length;i++){
+    if(select.options[i].value===wanted){ select.value=wanted; break; }
+  }
+})();
+
 /* Bonny Signature photo lightbox (weddings.html). Was an inline <script>. */
 (function(){
   var lb=document.getElementById('lb'),img=document.getElementById('lbImg'),th=document.getElementById('lbThumbs'),ti=document.getElementById('lbTitle'),srcs=[],i=0;
