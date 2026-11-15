@@ -1,14 +1,65 @@
 # Bonny Forever — website
 
 Static website for Bonny Forever Floral Design (real-touch faux flower hire, West Sussex),
-run by Nina. Hand-coded HTML, CSS and JS. No build step, no framework, no npm.
+run by Nina. Built and maintained by Adam (web designer). Hand-coded HTML, CSS and JS:
+no build step, no framework, no npm.
 
-History:
-- **Originally** exported from another AI tool as single files with base64-embedded images
-  and inline CSS/JS. The first git commit (`670108e`) is that untouched export.
-- **Restructured** Oct 2026, when `website.html` was renamed `index.html`.
-- **Content update** Oct 2026, following the owner's brief in `docs/content-brief.md`. The
-  brief is the source of truth for the wording on all three pages.
+## Current status (15 Nov 2026)
+
+- **Live preview:** https://bonny-forever.vercel.app, deployed from `main`. Everything below is
+  merged and live there. There are no other branches.
+- **Not launched yet.** The real domain isn't connected, and the pre-launch checklist below is
+  still open.
+- **History** (key commits on `main`):
+  - `670108e` The original export from another AI tool: single files with base64 images and
+    inline CSS/JS. Kept untouched for reference.
+  - `a1e6e81` Restructured into `site/` with separate CSS/JS/images; `website.html` became
+    `index.html`.
+  - `03eb6fe` Mobile menu and fixed dead links.
+  - `b67872c` Images optimised, plus favicon and share tags.
+  - `66a7988` to `5b90caa` The content update from the owner's brief (`docs/content-brief.md`):
+    Home, Weddings, Business rebuilt.
+  - `91c4c81`, `aaa6ec2` The Bonny Signature package became 5 cards. A welcome board was
+    added; aisle markers are an add-on, not part of the package.
+
+## Pre-launch checklist (all open)
+
+1. **Connect the enquiry form.** It shows "Thank you! I'll be in touch within 24 hours." but
+   sends nothing. It needs a real form handler (ask Adam before choosing or adding a
+   third-party service). The inputs already have `name` attributes: `name`, `email`,
+   `planning`, `date`, `venue`, `ideas`.
+2. **Replace the 9 photo placeholders.** Sizes to supply:
+   - **Weddings package, welcome board:** 5:4 landscape, 1250×1000 px. It's shown at up to
+     600×480. 1000px tall matches the other package photos, which the lightbox shows near
+     full size.
+   - **Weddings add-ons (4), square, at least 160×160 px:** extra table centrepiece, statement
+     plinth arrangement, aisle arrangement, moving pieces from ceremony to reception. Shown
+     at 80×80.
+   - **Business service cards (4), 16:11 landscape, at least 1200×825 px:** monthly flower
+     subscription, seasonal subscription, permanent installations, event flowers.
+
+   How to swap them in is under "Shared components" below.
+3. **Confirm the package price.** The package gained a welcome board, but the price is
+   unchanged pending Nina's confirmation: £495, or £395 with the founding offer. If it
+   changes, update every place listed under "Where prices and offers appear".
+4. **Confirm the launch domain.** The share tags (`og:url`, `og:image`) need absolute URLs and
+   assume `https://bonnyforever.co.uk`. If the live address differs, find and replace that
+   string in the three pages. Then connect the domain in Vercel.
+5. **Free-visit wording (Nina to decide; used as written for now).**
+   - The Business closing section says "I'll be in touch within 24 hours to arrange a free
+     visit", and its buttons say "Book a free visit".
+   - Pricing and the FAQ say visits are free only across Worthing, Brighton and surrounding
+     areas.
+6. **Repo visibility.** `adamwallacedesign/bonny-forever` is **public** (Adam's choice when it
+   was created). Anyone can see:
+   - the full history, including the original export;
+   - the client's design-system document (with its critique of her logo);
+   - full-size originals, including Holly Clark's photo;
+   - the owner's brief and this file;
+   - Adam's personal email address on every commit.
+
+   Decide with Nina whether to make it private before launch (Vercel works the same with a
+   private repo). Making it private later doesn't undo anything already seen or copied.
 
 ## Folder structure
 
@@ -18,14 +69,14 @@ site/                  ← THE WEBSITE. Only this folder gets deployed.
   weddings.html          Weddings (Bonny Signature package, add-ons, FAQ, photo lightbox)
   commercial.html        Business. The nav says "Business"; the file name stays commercial.html.
   css/styles.css         Shared by every page: layout, header, footer and all shared components
-  css/weddings.css       weddings.html only: package photo cards, "The look" layout, lightbox
-  js/main.js             Loaded by every page: mobile menu, enquiry form, ?enquiry= pre-select, lightbox
+  css/weddings.css       weddings.html only: package cards, "The look" layout, lightbox
+  js/main.js             Every page: mobile menu, enquiry form, ?enquiry= pre-select, lightbox
   images/                All site photos and the logo, optimised for the web
-  images/social/         1200×630 share images used by the og:image tags (one per page)
+  images/social/         1200×630 share images used by og:image (share-home/-weddings/-commercial)
   favicon.ico            16/32/48px, cut from the logo's flower emblem
   apple-touch-icon.png   180px home-screen icon (emblem on paper background)
-docs/content-brief.md  ← The owner's content brief. Not deployed.
-originals/             ← Full-quality originals of every site image, before optimisation. Not deployed.
+docs/content-brief.md  ← The owner's content brief: the source of truth for all wording. Not deployed.
+originals/             ← Full-quality originals of every site image. Not deployed.
 design-system/         ← Brand exploration doc ("Exploration 03"). Reference only, never deploy.
 CLAUDE.md, .gitignore  ← Repo root, not deployed.
 ```
@@ -42,23 +93,55 @@ CLAUDE.md, .gitignore  ← Repo root, not deployed.
   (`#services`) → Pricing (`#pricing`) → Why faux flowers for your business? (`#why-faux`) →
   How it works (`#how-it-works`) → FAQ (`#faq`) → closing band → footer
 
-## Deploying
+### Where prices and offers appear (update all of them together)
 
-**Only `site/` gets deployed.** Vercel's Root Directory is set to `site`.
-`docs/`, `originals/`, `design-system/`, `CLAUDE.md` and `.gitignore` must never go live.
+- **Package £495:**
+  - Weddings: the package price line, the offer panel ("£395 instead of £495"), and the meta
+    description and `og:description` ("£495 for the day").
+  - Home: the "Weddings and celebrations" card ("from £495").
+  - The brief.
+- **Founding offer (£100 off for the first three couples):**
+  - The offer banner on Home and Weddings.
+  - The Weddings `#offer` panel.
+- **Launch offer (half price on the first month for the first three businesses):**
+  - The Business banner and the Business `#offer` panel.
+  - The Home "Flowers for your business" card.
+- **Business subscriptions "from £50 a month":**
+  - The Home business card.
+  - Business Pricing.
+  - The Business meta description and `og:description`.
+- **Other prices:** bespoke "from £695" (Weddings heading and text), the add-on prices
+  (Weddings price list), and the £50 for moving pieces (price list and FAQ).
+- **Package contents** appear in:
+  - the Weddings package cards;
+  - the Weddings meta description and `og:description` ("arch, centrepieces, top table runner,
+    plinths and welcome board");
+  - the brief.
 
-**Workflow:** GitHub repo `adamwallacedesign/bonny-forever`.
-- `main` is production (bonny-forever.vercel.app).
-- Do changes on a branch and push it; Vercel builds a preview link for every push.
-- Merge into `main` when they're approved.
+## Deploying and workflow
 
-**Pre-launch checklist:**
-1. **Confirm the launch domain.** The social-share tags (`og:url`, `og:image`) need absolute
-   URLs and assume `https://bonnyforever.co.uk`. If the live address differs, search for that
-   string in the three pages and replace it.
-2. **Connect the enquiry form** (next steps, item 1). It currently promises a reply but sends nothing.
-3. **Replace the 9 photo placeholders** (next steps, item 2).
-4. **Confirm the package price** (next steps, item 3).
+- **GitHub:** `adamwallacedesign/bonny-forever`. `main` is production and goes live on
+  bonny-forever.vercel.app on every push.
+- **Adam's review flow:**
+  1. Do the work on a new branch, committing per page or per change.
+  2. Push the branch. Vercel builds a preview, and Adam reviews it in the Vercel dashboard
+     under the project's Deployments.
+  3. When Adam approves, merge into `main` (fast-forward), push, and delete the branch
+     locally and on GitHub.
+  4. Ask before merging to `main` or pushing anything else.
+- **Vercel settings:**
+  - Root Directory is `site`, so only `site/` is deployed. `docs/`, `originals/`,
+    `design-system/` and `CLAUDE.md` return 404 on the live site, and must stay that way.
+  - There's no build command; Vercel serves the files as they are.
+  - "Skip deployments when there are no changes to the root directory" is on, so a push that
+    only touches files outside `site/` doesn't redeploy.
+- **Confirming a deploy without Vercel access:** Vercel reports each build to GitHub.
+  - `gh api repos/adamwallacedesign/bonny-forever/commits/<sha>/status` shows the Vercel
+    state ("success" means built) and a link.
+  - `gh api "repos/adamwallacedesign/bonny-forever/deployments?sha=<sha>"` shows whether it was
+    Production or Preview.
+  - Then `curl` the live pages to check the new content is served, and that the private paths
+    above still 404.
 
 ## Preview locally
 
@@ -73,7 +156,8 @@ For the design doc, run the same command from `design-system/`.
 ## Writing and copy
 
 - **Use the owner's copy exactly** (`docs/content-brief.md`). Don't reword, shorten or add
-  marketing language. British English (colour, centrepiece, personalise).
+  marketing language. British English (colour, centrepiece, personalise). If Nina's wording
+  changes, update the brief too.
 - **First person, as Nina** ("I", "me", "my"). "We" only ever means Nina and the customer
   ("we'll plan timings together"), never a team.
 - **Never bring back:** "Sustainable", "zero waste", "single-use", "circular rental",
@@ -81,39 +165,55 @@ For the design doc, run the same command from `design-system/`.
   "within 1 hour" / "within 2 hours", "our team", "West Sussex team".
 - **Button labels come from the brief.** For example "Get in touch", "Check my date",
   "Book a free visit", "Send my message". Don't invent new ones for the same action.
+- **Placeholders the owner hasn't supplied** (a price, a quantity, a photo) get a clear visible
+  placeholder and are listed for Adam. Never invent them.
 - **One H1 per page** (the hero). Section headings are H2; card, step and FAQ titles are H3.
 - **Headings have one italic phrase** in rose (wisteria on dark bands, grape on the pink offer
   panel), marked with `<em>`. That's the brand's styling rule. The words never change.
 - Typographic apostrophes and quotes (`&rsquo;`, `&ldquo;`) as used throughout the site.
+- **Contact details:** email `hello@bonnyforever.co.uk` (plain `mailto:` links; never Cloudflare
+  `/cdn-cgi/` email protection). Instagram `@bonnyforeverflorals`, linked to
+  https://instagram.com/bonnyforeverflorals.
 
 ## Conventions
 
 - **Filenames:** lowercase-kebab-case. Images are named by what is in them
   (`centrepiece-peach-roses.jpg`), not by the page they're on. The exception is the share
-  images in `images/social/`, which are per page (`share-home.jpg`). One file per photo:
-  don't add second copies at other sizes.
+  images in `images/social/`, which are per page. One file per photo: don't add second copies
+  at other sizes.
 - **No base64 / data-URI images.** Every image is a file in `site/images/`.
 - **Adding or replacing a photo:**
   1. Put the full-quality original in `originals/`.
   2. Make the web copy no wider than 2× its largest displayed width (tablets at 768–820px
-     show single-column photos about 750px wide, so 1500px is usually right). Save it as
-     JPEG quality 85.
-  3. Keep the colour profile. Many photos are Display P3 (iPhone). Re-encoding through a tool
-     that drops the profile makes oranges and pinks look duller on Apple screens.
-  4. Lightbox photos (weddings `.sig-tile`) display at their natural pixel size on big
+     show single-column photos about 750px wide, so 1500px is usually right), at JPEG
+     quality 85.
+  3. Keep the colour profile. Many photos are Display P3 (iPhone). A tool that drops the
+     profile makes oranges and pinks look duller on Apple screens. See "Working notes" for
+     how the current images were encoded.
+  4. Lightbox photos (weddings `button.sig-tile`) display at their natural pixel size on big
      screens, so don't shrink those below their current dimensions.
-- **Every `<img>`** gets `width` and `height` set to its real pixel size, which prevents
-  layout shift. `img { height: auto; }` in `styles.css` stops the height attribute fighting
-  CSS that only sets a width. Add `loading="lazy"` to every image except the logo and the
-  hero (anything visible in the first screen on any device).
+- **Every `<img>`:**
+  - `width` and `height` set to its real pixel size, which prevents layout shift.
+    `img { height: auto; }` in `styles.css` stops the height attribute fighting CSS that only
+    sets a width.
+  - `loading="lazy"` on everything except the logo and the hero, or anything else visible in
+    the first screen on any device.
 - **Alt text:** every `<img>` needs meaningful alt text. Never use `alt=""`: the owner checks
   for empty alts. On the Home gallery, the visible caption doubles as the alt text.
 - **Relative paths only** (`images/…`, `css/…`, `index.html#contact`), with no leading slash.
-- **CSS:** everything shared lives in `styles.css`. Only weddings-specific pieces live in
-  `weddings.css`. No inline `style=""` attributes. Brand colours are variables in `:root` of
-  `styles.css` (`--grape`, `--grape-dark`, `--ink`, `--rose`, `--rose-tint`, `--wisteria`,
-  `--sage`, `--paper`). Fonts are Fraunces (headings) and Jost (body), loaded from Google Fonts
-  in each page's `<head>`.
+- **CSS:**
+  - Everything shared lives in `styles.css`. Only weddings-specific pieces live in
+    `weddings.css`. No inline `style=""` attributes; there are none now.
+  - Brand colours are variables in `:root` of `styles.css` (`--grape`, `--grape-dark`, `--ink`,
+    `--rose`, `--rose-tint`, `--wisteria`, `--sage`, `--paper`).
+  - Fonts are Fraunces (headings) and Jost (body), loaded from Google Fonts in each page's
+    `<head>`.
+- **Breakpoints:**
+  - **992px:** nav becomes the menu button, and most grids stack.
+  - **768px:** the Home explore cards stack.
+  - **720px:** the weddings package grid becomes 2 columns.
+  - **560px:** small-phone tweaks (highlights, banner text, footer, price list, Business grids,
+    compact package cards).
 - **JS:** `main.js` loads on every page, so each feature lives in its own
   `(function(){ … })();` block that returns early if its element isn't on the page.
 
@@ -124,23 +224,27 @@ For the design doc, run the same command from `design-system/`.
   - Home and Weddings: "Founding offer", linking to `weddings.html#offer` / `#offer`.
   - Business: "Launch offer", linking to `#offer`.
 - **Header** `header.site-header` is `position: sticky`, so it pins to the top once the banner
-  has scrolled off. The hero is pulled up 79px underneath it with
-  `.site-header + main > .hero:first-child` so the photo shows through the translucent header.
-  `html { scroll-padding-top: 79px }` makes in-page links land just below it. If the header
-  height changes, update all three 79px values.
+  has scrolled off.
+  - The hero is pulled up 79px underneath it with `.site-header + main > .hero:first-child`,
+    so the photo shows through the translucent header.
+  - `html { scroll-padding-top: 79px }` makes in-page links land just below it.
+  - If the header height changes, update all three 79px values.
 - **Nav** order: Home · Weddings · Business · My story · Gallery · Get in touch (`.btn-nav`).
   The current page's link has `aria-current="page"`.
   - On Home, links are `#top`, `#about`, `#gallery`, `#contact`.
   - On other pages, they're `index.html#…`.
 - **Mobile menu:** `<button class="nav-toggle">` before `<nav id="main-nav">`. At 992px and
-  below, `main.js` toggles `.nav-open` on the header and keeps `aria-expanded` in sync.
+  below, `main.js` toggles `.nav-open` on the header and keeps `aria-expanded` in sync. It
+  closes on Escape, on a link tap, on a tap outside, and on resize.
 - **`<main>`** wraps everything between the header and footer.
 - **Footer:** the same copy and links on every page.
 - **Contact links pre-select the form.** `index.html?enquiry=wedding#contact` or
-  `?enquiry=business#contact` picks that option in "What are you planning?". Every contact
-  link on Weddings uses `wedding`, and every contact link on Business uses `business`. Without
-  it, the dropdown starts on "Choose one", which must be changed before sending. Option values
-  are `wedding`, `celebration`, `business` and `other`.
+  `?enquiry=business#contact` picks that option in "What are you planning?".
+  - Every contact link on Weddings (nav, buttons, footer) uses `wedding`, and every one on
+    Business uses `business`.
+  - Without it, the dropdown starts on "Choose one", which is required, so it must be changed
+    before sending.
+  - Option values are `wedding`, `celebration`, `business` and `other`.
 
 ### Shared components (all in `styles.css`)
 
@@ -160,61 +264,80 @@ For the design doc, run the same command from `design-system/`.
 
 - **FAQ accordion:** uses the browser's own `<details>`/`<summary>`. Keyboard (Tab, Enter/Space)
   and screen-reader support are built in, and it needs no JavaScript.
-- **Photo placeholders:** swap each `<span class="photo-placeholder">` for an `<img>`, with
-  width, height, alt and `loading="lazy"`, when the photo arrives.
-- **Lightbox** (weddings only): each `button.sig-tile` opens its own photo. Add a second
-  photo with `data-extra-src` and `data-extra-alt` (the floral arch has one). The large image
-  is created by `main.js` when it opens, so there is never an empty `<img>` in the page.
-- **Package cards without a photo yet** are `<div class="sig-tile sig-tile-static">`, holding a
-  photo placeholder and no "View larger". They look the same but aren't clickable, and
-  `main.js` skips them. When the photo arrives, turn the card into a `<button class="sig-tile">`
-  copied from the others: photo, "View larger" label and `aria-label`.
+- **Photo placeholders:** when the photo arrives, replace the `<span class="photo-placeholder">`
+  with an `<img>` that has width, height, alt and `loading="lazy"`.
+- **Lightbox** (weddings only): each `button.sig-tile` opens its own photo.
+  - Add a second photo with `data-extra-src` and `data-extra-alt` (the floral arch has one).
+  - The large image is created by `main.js` when it opens, so there is never an empty `<img>`
+    in the page.
+  - Focus moves to Close on open and back to the card on close. Arrow keys and Escape work.
+- **Package cards without a photo yet** (the welcome board) are
+  `<div class="sig-tile sig-tile-static">`, with a placeholder and no "View larger".
+  - They look the same but aren't clickable, and `main.js` skips them.
+  - When the photo arrives, turn the card into a `<button class="sig-tile">` copied from the
+    plinth card: photo, "View larger", `aria-label`, and keep `.sig-wide`.
 - **The package grid** holds 5 cards: arch, centrepieces, runner, plinths, welcome board.
+  "Delivery, setup and collection" is the line beneath (`.sig-included`).
   - **Above 720px** it's a 6-column grid. The first three cards span 2 columns each, making a
-    row of 3. Cards with `.sig-wide` (plinths, welcome board) span 3 each, making a row of 2
-    at half width, with 5:4 photos so both rows are about the same height. The plinth photo
-    uses `.crop-high` (`object-position: 50% 30%`) to keep its spires in frame.
+    row of 3. Cards with `.sig-wide` (plinths, welcome board) span 3 each, making a row of 2 at
+    half width, with 5:4 photos so both rows are about the same height. The plinth photo uses
+    `.crop-high` (`object-position: 50% 30%`) to keep its spires in frame.
   - **At 720px and below** it's 2 columns. An odd last card (the welcome board) spans the full
     width with a 5:4 photo, so there's no lone card beside an empty space.
 
-## Next steps
+## Working notes (for Claude)
 
-Visible to visitors — fix before launch:
-1. **The enquiry form doesn't send anything.** It shows "Thank you! I'll be in touch within 24
-   hours." but the message goes nowhere. It needs a real form handler. The inputs already have
-   `name` attributes: `name`, `email`, `planning`, `date`, `venue`, `ideas`.
-2. **Nine photo placeholders** need photos:
-   - **Weddings package, welcome board,** 5:4 landscape, supply 1250×1000 px. It's shown at up
-     to 600×480 (full width at 720px). 1000px tall matches the other package photos, which
-     the lightbox shows close to full size.
-   - **Weddings add-ons,** shown at 80×80, supply at least 160×160 px square: extra table
-     centrepiece, statement plinth arrangement, aisle arrangement, moving pieces from ceremony
-     to reception.
-   - **Business service cards,** 16:11 landscape, supply at least 1200×825 px: monthly flower
-     subscription, seasonal subscription, permanent installations, event flowers.
-3. **Confirm the package price.** The package now includes a welcome board, but the price is
-   unchanged pending confirmation. It's £495 (£395 with the founding offer) in the package
-   section, offer panel, weddings meta and share text, and the Home card's "from £495".
-4. **A wording point for the owner** (currently used as written). The Business closing section
-   says "I'll be in touch within 24 hours to arrange a free visit" and its buttons say "Book a
-   free visit". The Pricing and FAQ copy say visits are free only across Worthing, Brighton and
-   surrounding areas.
+- **Adam's preferences:**
+  - Ask before major changes, installs, third-party services or anything outward-facing.
+  - Explain in plain, step-by-step terms.
+  - Show evidence (screenshots and checks) rather than assume.
+- **Installed on Adam's Mac:**
+  - Homebrew.
+  - `gh`, logged in as `adamwallacedesign` over HTTPS, so `git push` works without prompts.
+  - Google Chrome, used headless for screenshots and tests.
+  - Node, and Python 3, but no PIL.
+  - **Not** installed: the Vercel CLI, ImageMagick, cwebp.
+  - The Vercel connector in Claude needs authorising via `/mcp` before Vercel can be used
+    directly.
+- **Testing approach used so far:**
+  - Serve `site/` with `python3 -m http.server`.
+  - Drive headless Chrome over the DevTools protocol from small Node scripts (Node 24 has
+    WebSocket built in) for screenshots at 390, 820 and 1440px, link-clicking, keyboard tests
+    and pixel comparisons.
+  - Those scripts lived in the session scratchpad and are **not** in the repo. Rebuild them as
+    needed, or ask Adam before adding a `tools/` folder.
+- **Gotchas found while testing:**
+  - Lazy images never load until they're scrolled into view, so scroll the page before
+    checking images.
+  - Navigating to the same page with only a different `#hash` fires no load event.
+  - Chrome renders photos with small run-to-run differences (up to about 20 levels out of 255),
+    so compare non-photo areas strictly and photo areas with tolerance.
+  - macOS has no `timeout` command.
+  - zsh treats `=====` specially in echo.
+- **How the current images were encoded:**
+  - `sips` can't write WebP, and its JPEGs barely shrink.
+  - So photos were re-encoded in headless Chrome: draw onto a canvas created with
+    `{colorSpace: 'display-p3'}` (or `'srgb'` for sRGB photos), then `toBlob('image/jpeg', 0.85)`.
+    The colour profile is kept.
+  - A re-encode was kept only if it saved at least 15%; otherwise the original file was used.
 
-Clean-up:
+## Later (clean-up, not blocking launch)
 
-5. **Colour contrast.** Rose italic headings on the paper background are about 2.8:1, below
+1. **Colour contrast.** Rose italic headings on the paper background are about 2.8:1, below
    the 3:1 accessibility minimum for large text (on white they just pass). This is a
    pre-existing brand choice; consider a slightly deeper rose for heading text.
-6. `white-roses-closeup.jpg` ("The look") is only 900px wide, so it's a little soft on retina
+2. `white-roses-closeup.jpg` ("The look") is only 900px wide, so it's a little soft on retina
    tablets. Use a larger original if one exists.
-7. Optional: switch photos to WebP for about 25–30% less weight. Use `brew install webp`,
-   then `cwebp -q 82 -metadata icc` to keep the colour profile. Serve WebP directly with no
-   `<picture>` fallback: the site already serves a WebP with no fallback and every current
-   browser supports it.
-8. The share images (`images/social/`) are plain photo crops. Consider designing branded
+3. **The weddings meta description is 159 characters,** right at Google's limit, so "for the
+   day." may occasionally be cut off in search results.
+4. Optional: switch photos to WebP for about 25–30% less weight. Use `brew install webp`
+   (ask first), then `cwebp -q 82 -metadata icc` to keep the colour profile. Serve WebP
+   directly with no `<picture>` fallback: the site already serves a WebP with no fallback and
+   every current browser supports it.
+5. The share images (`images/social/`) are plain photo crops. Consider designing branded
    versions with the logo.
-9. The Google Fonts URL requests Fraunces' SOFT axis, which the site never uses.
-10. `wedding-reception-hollyclark.webp` (Weddings hero, Home card) is by Holly Clark
+6. The Google Fonts URL requests Fraunces' SOFT axis, which the site never uses.
+7. `wedding-reception-hollyclark.webp` (Weddings hero, Home card) is by Holly Clark
    Photography. Check permission and add a credit.
-11. Nav and footer links have no visible `:focus-visible` style beyond the browser default.
-    Add one in the brand colours, like the menu button's grape outline.
+8. Nav and footer links have no visible `:focus-visible` style beyond the browser default.
+   Add one in the brand colours, like the menu button's grape outline.
