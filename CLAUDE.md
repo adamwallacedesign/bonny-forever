@@ -133,8 +133,10 @@ CLAUDE.md, .gitignore  ← Repo root, not deployed.
   - Root Directory is `site`, so only `site/` is deployed. `docs/`, `originals/`,
     `design-system/` and `CLAUDE.md` return 404 on the live site, and must stay that way.
   - There's no build command; Vercel serves the files as they are.
-  - "Skip deployments when there are no changes to the root directory" is on, so a push that
-    only touches files outside `site/` doesn't redeploy.
+  - "Skip deployments when there are no changes to the root directory" is switched on, but a
+    push that only changed CLAUDE.md (15 Nov 2026) still produced a deployment. That's
+    harmless, because the site content is unchanged, but don't rely on docs-only pushes being
+    skipped.
 - **Confirming a deploy without Vercel access:** Vercel reports each build to GitHub.
   - `gh api repos/adamwallacedesign/bonny-forever/commits/<sha>/status` shows the Vercel
     state ("success" means built) and a link.
