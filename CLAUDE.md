@@ -57,7 +57,9 @@ CLAUDE.md, .gitignore  ← Repo root, not deployed.
    URLs and assume `https://bonnyforever.co.uk`. If the live address differs, search for that
    string in the three pages and replace it.
 2. **Connect the enquiry form** (next steps, item 1). It currently promises a reply but sends nothing.
-3. **Replace the 8 photo placeholders** (next steps, item 2).
+3. **Replace the 10 photo placeholders** (next steps, item 2).
+4. **Confirm the welcome board and aisle marker quantities.** Their captions still read
+   "[number] …" (next steps, item 3).
 
 ## Preview locally
 
@@ -161,9 +163,15 @@ For the design doc, run the same command from `design-system/`.
   and screen-reader support are built in, and it needs no JavaScript.
 - **Photo placeholders:** swap each `<span class="photo-placeholder">` for an `<img>`, with
   width, height, alt and `loading="lazy"`, when the photo arrives.
-- **Lightbox** (weddings only): each `.sig-tile` button opens its own photo. Add a second
+- **Lightbox** (weddings only): each `button.sig-tile` opens its own photo. Add a second
   photo with `data-extra-src` and `data-extra-alt` (the floral arch has one). The large image
   is created by `main.js` when it opens, so there is never an empty `<img>` in the page.
+- **Package cards without a photo yet** are `<div class="sig-tile sig-tile-static">`, holding a
+  photo placeholder and no "View larger". They look the same but aren't clickable, and
+  `main.js` skips them. When the photo arrives, turn the card into a `<button class="sig-tile">`
+  copied from the others: photo, "View larger" label and `aria-label`.
+- **The package grid** has 3 columns on desktop (6 cards = 2 rows) and 2 columns at 992px
+  and below.
 
 ## Next steps
 
@@ -171,32 +179,44 @@ Visible to visitors — fix before launch:
 1. **The enquiry form doesn't send anything.** It shows "Thank you! I'll be in touch within 24
    hours." but the message goes nowhere. It needs a real form handler. The inputs already have
    `name` attributes: `name`, `email`, `planning`, `date`, `venue`, `ideas`.
-2. **Eight photo placeholders** need photos:
+2. **Ten photo placeholders** need photos:
+   - **Weddings package cards,** 4:5 portrait, supply 1000×1250 px: welcome board, aisle
+     marker. These are shown at up to 424×530; 1000px wide matches the other package photos,
+     which the lightbox shows close to full size.
    - **Weddings add-ons,** shown at 80×80, supply at least 160×160 px square: extra table
      centrepiece, statement plinth arrangement, aisle arrangement, moving pieces from ceremony
      to reception.
    - **Business service cards,** 16:11 landscape, supply at least 1200×825 px: monthly flower
      subscription, seasonal subscription, permanent installations, event flowers.
-3. **A wording point for the owner** (currently used as written). The Business closing section
+3. **The package now has 6 items, which is unconfirmed.** "Welcome board" and "Aisle marker"
+   were added with "[number]" captions. Once the quantities are confirmed:
+   - Update the captions.
+   - Update the weddings meta and `og:description`, which still list "arch, centrepieces, top
+     table runner and plinths".
+   - Check that "aisle marker" (included) is clearly different from the "Aisle arrangement"
+     add-on and the FAQ's "aisle arrangements".
+   - Confirm the price is still £495 / £395.
+   - Update `docs/content-brief.md`.
+4. **A wording point for the owner** (currently used as written). The Business closing section
    says "I'll be in touch within 24 hours to arrange a free visit" and its buttons say "Book a
    free visit". The Pricing and FAQ copy say visits are free only across Worthing, Brighton and
    surrounding areas.
 
 Clean-up:
 
-4. **Colour contrast.** Rose italic headings on the paper background are about 2.8:1, below
+5. **Colour contrast.** Rose italic headings on the paper background are about 2.8:1, below
    the 3:1 accessibility minimum for large text (on white they just pass). This is a
    pre-existing brand choice; consider a slightly deeper rose for heading text.
-5. `white-roses-closeup.jpg` ("The look") is only 900px wide, so it's a little soft on retina
+6. `white-roses-closeup.jpg` ("The look") is only 900px wide, so it's a little soft on retina
    tablets. Use a larger original if one exists.
-6. Optional: switch photos to WebP for about 25–30% less weight. Use `brew install webp`,
+7. Optional: switch photos to WebP for about 25–30% less weight. Use `brew install webp`,
    then `cwebp -q 82 -metadata icc` to keep the colour profile. Serve WebP directly with no
    `<picture>` fallback: the site already serves a WebP with no fallback and every current
    browser supports it.
-7. The share images (`images/social/`) are plain photo crops. Consider designing branded
+8. The share images (`images/social/`) are plain photo crops. Consider designing branded
    versions with the logo.
-8. The Google Fonts URL requests Fraunces' SOFT axis, which the site never uses.
-9. `wedding-reception-hollyclark.webp` (Weddings hero, Home card) is by Holly Clark
+9. The Google Fonts URL requests Fraunces' SOFT axis, which the site never uses.
+10. `wedding-reception-hollyclark.webp` (Weddings hero, Home card) is by Holly Clark
    Photography. Check permission and add a credit.
-10. Nav and footer links have no visible `:focus-visible` style beyond the browser default.
+11. Nav and footer links have no visible `:focus-visible` style beyond the browser default.
     Add one in the brand colours, like the menu button's grape outline.

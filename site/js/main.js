@@ -87,7 +87,8 @@
     lb.classList.remove('open'); document.body.style.overflow='';
     if(opener) opener.focus(); // back to the photo that was opened
   }
-  document.querySelectorAll('.sig-tile').forEach(function(t){ t.addEventListener('click',function(){ open(t); }); });
+  // Only the photo cards are buttons; cards still waiting for a photo (.sig-tile-static) are skipped
+  document.querySelectorAll('button.sig-tile').forEach(function(t){ t.addEventListener('click',function(){ open(t); }); });
   closeBtn.addEventListener('click',close);
   prev.addEventListener('click',function(){ show(i-1); });
   next.addEventListener('click',function(){ show(i+1); });
