@@ -49,7 +49,7 @@
 
 /* Photo lightbox (weddings.html). Each package card (button.sig-tile) and add-on photo
    (button.addon-photo) opens its own photo; one can add a second with data-extra-src and
-   data-extra-alt (the floral arch, welcome board and aisle arrangement do). The large <img>
+   data-extra-alt (the welcome board and aisle arrangement do). The large <img>
    is only created when a photo opens, so the page never holds an empty image, and every
    photo and thumbnail carries real alt text. */
 (function(){
