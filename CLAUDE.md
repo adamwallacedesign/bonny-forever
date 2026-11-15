@@ -6,11 +6,8 @@ no build step, no framework, no npm.
 
 ## Current status (15 Nov 2026)
 
-- **Live preview:** https://bonny-forever.vercel.app, deployed from `main`.
-- **In review (15 Nov 2026):** branch `weddings-add-ons-arch` (new arch photo, 3 add-on cards
-  with photos, moving pieces as a line). This file already describes it. When it's merged into
-  `main` and the branch is deleted, change this back to "Everything below is merged and live
-  there. There are no other branches."
+- **Live preview:** https://bonny-forever.vercel.app, deployed from `main`. Everything below is
+  merged and live there. There are no other branches.
 - **Not launched yet.** The real domain isn't connected, and the pre-launch checklist below is
   still open.
 - **History** (key commits on `main`):
@@ -26,9 +23,9 @@ no build step, no framework, no npm.
     added; aisle markers are an add-on, not part of the package.
   - `4265ed7` to `1512ebf` Welcome board photos in. The add-ons became photo cards, with the
     aisle arrangement photos in. The lightbox keeps keyboard focus inside while it's open.
-  - `b319260`, `5aabcda` New floral arch photo (`floral-arch-ivory-roses.jpg` replaced
-    `floral-arch-side.jpg`). The add-ons became 3 cards with photos, and "Moving pieces" a
-    line beneath them.
+  - `b319260` to `7af65f9` New floral arch photo (`floral-arch-ivory-roses.jpg` replaced
+    `floral-arch-side.jpg`); its lightbox now shows just that photo. The add-ons became 3
+    cards with photos, and "Moving pieces" a line beneath them.
 
 ## Pre-launch checklist (all open)
 
@@ -62,6 +59,13 @@ no build step, no framework, no npm.
 
    Decide with Nina whether to make it private before launch (Vercel works the same with a
    private repo). Making it private later doesn't undo anything already seen or copied.
+7. **Confirm permission for the Holly Clark reception photo.**
+   `wedding-reception-hollyclark.webp` is by Holly Clark Photography. It's used in three
+   places: the Weddings hero, a Home card (`index.html`), and the Weddings share image
+   (`images/social/share-weddings.jpg` is cut from it).
+   - Confirm Nina has permission to use it on the site and when the page is shared, and add
+     a credit if one is needed.
+   - If permission isn't given, replace it in all three places.
 
 ## Folder structure
 
@@ -274,8 +278,19 @@ For the design doc, run the same command from `design-system/`.
   with an `<img>` that has width, height, alt and `loading="lazy"`.
 - **Lightbox** (weddings only): each package card (`button.sig-tile`) and add-on photo
   (`button.addon-photo`) opens its own photo.
-  - Add a second photo with `data-extra-src` and `data-extra-alt`. The floral arch, welcome
-    board and aisle arrangement have one. Only one extra photo is supported.
+  - **One photo is the default.** The lightbox shows the card's own `<img>` and hides the
+    arrows and thumbnails. Most cards work this way, including the arch.
+  - **To add a second photo to any card's lightbox** (the welcome board and aisle arrangement
+    have one, so copy either):
+    1. Put the original in `originals/`, and make a web copy in `site/images/` about 1000px
+       wide (portrait photos can be taller), like the other lightbox photos. See "Adding or
+       replacing a photo". It only appears in the lightbox, not on the page.
+    2. On the card's `<button>` (`button.sig-tile` or `button.addon-photo`), add
+       `data-extra-src="images/<file>.jpg"` and `data-extra-alt="<what the photo shows>"`.
+    3. That's all: `main.js` then shows the arrows and two thumbnails. Test it with Enter,
+       the arrow keys, Tab and Escape.
+    - Only one extra photo is supported. Three or more would need a change to `open()` in
+      `main.js` (ask Adam first).
   - The large image is created by `main.js` when it opens, so there is never an empty `<img>`
     in the page.
   - Focus moves to Close on open and back to the photo on close. Arrow keys and Escape work.
@@ -374,15 +389,13 @@ For the design doc, run the same command from `design-system/`.
 5. The share images (`images/social/`) are plain photo crops. Consider designing branded
    versions with the logo.
 6. The Google Fonts URL requests Fraunces' SOFT axis, which the site never uses.
-7. `wedding-reception-hollyclark.webp` (Weddings hero, Home card) is by Holly Clark
-   Photography. Check permission and add a credit.
-8. Nav and footer links have no visible `:focus-visible` style beyond the browser default.
+7. Nav and footer links have no visible `:focus-visible` style beyond the browser default.
    Add one in the brand colours, like the menu button's grape outline.
-9. **The welcome board photos were supplied only 900px wide** (they look WhatsApp-compressed).
+8. **The welcome board photos were supplied only 900px wide** (they look WhatsApp-compressed).
    The 5:4 card crop is 900×720, against the 1250×1000 asked for, so it's a little soft on
    retina desktops and tablets. Ask Nina for the originals straight from her phone, and swap
    them in at the same file names.
-10. **The centrepiece and plinth add-ons reuse the package photos,** so the same two photos
-    appear twice on the Weddings page. Their own shots would serve them better: for example,
-    a single extra centrepiece on a guest table, and one plinth arrangement on its stand.
-    See "Add-on cards" for how to swap them in.
+9. **The centrepiece and plinth add-ons reuse the package photos,** so the same two photos
+   appear twice on the Weddings page. Their own shots would serve them better: for example,
+   a single extra centrepiece on a guest table, and one plinth arrangement on its stand.
+   See "Add-on cards" for how to swap them in.
