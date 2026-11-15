@@ -59,13 +59,31 @@ no build step, no framework, no npm.
 
    Decide with Nina whether to make it private before launch (Vercel works the same with a
    private repo). Making it private later doesn't undo anything already seen or copied.
-7. **Confirm permission for the Holly Clark reception photo.**
-   `wedding-reception-hollyclark.webp` is by Holly Clark Photography. It's used in three
-   places: the Weddings hero, a Home card (`index.html`), and the Weddings share image
-   (`images/social/share-weddings.jpg` is cut from it).
-   - Confirm Nina has permission to use it on the site and when the page is shared, and add
-     a credit if one is needed.
-   - If permission isn't given, replace it in all three places.
+7. **Replace the wedding reception placeholder photo (`wedding-reception-hollyclark.webp`)
+   before launch.** It's one file (2048×1463) used in three places. Supply one landscape
+   photo (3:2 or 4:3), at least 2880px wide, and make all three from it:
+   - **Weddings hero** (`weddings.html`, behind the H1). This needs the most pixels.
+     - It fills the screen width and is about 800px tall, so its shape changes a lot: 1440×796
+       on a 1440px laptop, 2560×796 on a large monitor, roughly 4:3 on tablets, and tall and
+       narrow on phones (390×781).
+     - Keep the subject in the centre. Phones show only the middle third of the photo's
+       width, and wide screens only the middle half of its height.
+     - The heading and button sit on the left over a dark overlay, so a calm area there
+       reads best.
+     - Make the web copy about 2400–2880px wide (the current one is 2048).
+   - **Home card "Weddings and celebrations"** (`index.html`, "What are you planning?").
+     - It uses the same file as the hero, cropped to 16:10 from the centre.
+     - It's shown at up to 550×344 (1100×688 on retina screens), so the hero's file covers
+       it.
+   - **Weddings share image** (`images/social/share-weddings.jpg`). This is what appears
+     when the Weddings page is shared in messages or on social media.
+     - It's a separate file, exactly 1200×630 (1.91:1), cropped from the new photo, at JPEG
+       quality 85.
+   - **When it's in:**
+     - Name the file after what's in it, and update the `src` in both pages.
+     - Write new alt text for both pages (they currently share the same alt) and for
+       `og:image:alt` in `weddings.html`.
+     - Remove the old web copy from `site/images/`. Its original stays in `originals/`.
 
 ## Folder structure
 
