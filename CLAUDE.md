@@ -6,8 +6,11 @@ no build step, no framework, no npm.
 
 ## Current status (15 Nov 2026)
 
-- **Live preview:** https://bonny-forever.vercel.app, deployed from `main`. Everything below is
-  merged and live there. There are no other branches.
+- **Live preview:** https://bonny-forever.vercel.app, deployed from `main`.
+- **In review (15 Nov 2026):** branch `home-share-image` (Home share image matches the new
+  hero). This file already describes it. When it's merged into `main` and the branch is
+  deleted, change this back to "Everything below is merged and live there. There are no other
+  branches."
 - **Not launched yet.** The real domain isn't connected, and the pre-launch checklist below is
   still open.
 - **History** (key commits on `main`):
@@ -26,8 +29,9 @@ no build step, no framework, no npm.
   - `b319260` to `7af65f9` New floral arch photo (`floral-arch-ivory-roses.jpg` replaced
     `floral-arch-side.jpg`); its lightbox now shows just that photo. The add-ons became 3
     cards with photos, and "Moving pieces" a line beneath them.
-  - `484ae8a` New Home hero photo (`pink-heather-moorland.jpg` replaced
-    `centrepiece-peach-roses.jpg`, which stays in the Home gallery).
+  - `484ae8a`, `4b0d81e` New Home hero photo (`pink-heather-moorland.jpg` replaced
+    `centrepiece-peach-roses.jpg`, which stays in the Home gallery). The Home share image
+    now matches it.
 
 ## Pre-launch checklist (all open)
 
@@ -306,8 +310,12 @@ For the design doc, run the same command from `design-system/`.
       sprigs behind the hero text on phones and makes the paragraph harder to read.
   - **Weddings:** `wedding-reception-hollyclark.webp`, the short hero, to be replaced before
     launch (pre-launch checklist item 7).
-  - The Home share image (`images/social/share-home.jpg`) is still cut from the old Home
-    hero photo, the peach roses centrepiece. Ask Adam before changing it.
+  - **The Home share image matches the Home hero.** `images/social/share-home.jpg` is a
+    1200×630 crop of `pink-heather-moorland.jpg`, trimmed 84px from the left so the sharp
+    heather on the right stays whole.
+    - If the Home hero photo changes, ask Adam whether the share image should change too.
+    - If it does, make a new 1200×630 crop at the same file name and update `og:image:alt`
+      in `index.html`.
 - **Lightbox** (weddings only): each package card (`button.sig-tile`) and add-on photo
   (`button.addon-photo`) opens its own photo.
   - **One photo is the default.** The lightbox shows the card's own `<img>` and hides the
