@@ -98,5 +98,12 @@
     if(e.key==='Escape')close();
     if(e.key==='ArrowLeft')show(i-1);
     if(e.key==='ArrowRight')show(i+1);
+    if(e.key==='Tab'){ // keep focus inside the lightbox: Tab and Shift+Tab cycle through its visible buttons
+      var f=Array.prototype.filter.call(lb.querySelectorAll('button'),function(b){ return b.offsetParent!==null; });
+      var first=f[0], last=f[f.length-1], a=document.activeElement;
+      if(!lb.contains(a)){ e.preventDefault(); first.focus(); }
+      else if(e.shiftKey&&a===first){ e.preventDefault(); last.focus(); }
+      else if(!e.shiftKey&&a===last){ e.preventDefault(); first.focus(); }
+    }
   });
 })();
