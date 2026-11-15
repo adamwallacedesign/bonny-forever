@@ -6,8 +6,16 @@
 .package-price-line{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;margin-bottom:28px}
 .package-price-line .package-price{font-size:30px;margin:0}
 .package-price-line small{font-size:14px;color:var(--ink);opacity:.75}
-/* 6 cards: 3 columns (2 rows) on desktop, 2 columns (3 rows) at 992px and below */
-.sig-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+/* 5 cards. Above 720px: a 6-column grid. The first three cards span 2 columns (a row of 3);
+   .sig-wide cards (plinths, welcome board) span 3 (a row of 2, half width each) and get a
+   wider 5:4 photo, so both rows come out about the same height.
+   720px and below: 2 columns, and an odd last card spans the full width (see the bottom). */
+.sig-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:22px}
+.sig-grid>.sig-tile{grid-column:span 2}
+.sig-grid>.sig-wide{grid-column:span 3}
+.sig-wide .sig-photo{aspect-ratio:5/4}
+/* keeps the plinth's tall white spires in frame when it is cropped to 5:4 */
+.sig-photo img.crop-high{object-position:50% 30%}
 .sig-tile{all:unset;cursor:pointer;display:flex;flex-direction:column;background:#fff;border:var(--rule);border-radius:20px;overflow:hidden;transition:transform .25s,box-shadow .25s}
 .sig-tile:hover,.sig-tile:focus-visible{transform:translateY(-5px);box-shadow:0 18px 40px -16px rgba(52,42,56,.3)}
 .sig-tile:focus-visible{outline:2px solid var(--grape);outline-offset:3px}
@@ -52,7 +60,15 @@
 
 .sig-label,.sig-included{overflow-wrap:break-word}
 .sig-zoom{white-space:nowrap}
-@media(max-width:992px){.sig-grid{grid-template-columns:repeat(2,1fr)}.sig-box{padding:26px}.look-section .story-img{max-width:520px}}
+@media(max-width:992px){.sig-box{padding:26px}.look-section .story-img{max-width:520px}}
+@media(max-width:720px){
+  .sig-grid{grid-template-columns:repeat(2,1fr)}
+  .sig-grid>.sig-tile,.sig-grid>.sig-wide{grid-column:span 1}
+  .sig-wide .sig-photo{aspect-ratio:4/5}
+  /* odd number of cards: the last one spans both columns, with a wide photo */
+  .sig-grid>.sig-tile:last-child:nth-child(odd){grid-column:1 / -1}
+  .sig-grid>.sig-tile:last-child:nth-child(odd) .sig-photo{aspect-ratio:5/4}
+}
 @media(max-width:560px){
   .sig-box{padding:18px 16px}
   .sig-grid{gap:12px}

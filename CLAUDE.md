@@ -57,9 +57,8 @@ CLAUDE.md, .gitignore  ← Repo root, not deployed.
    URLs and assume `https://bonnyforever.co.uk`. If the live address differs, search for that
    string in the three pages and replace it.
 2. **Connect the enquiry form** (next steps, item 1). It currently promises a reply but sends nothing.
-3. **Replace the 10 photo placeholders** (next steps, item 2).
-4. **Confirm the welcome board and aisle marker quantities.** Their captions still read
-   "[number] …" (next steps, item 3).
+3. **Replace the 9 photo placeholders** (next steps, item 2).
+4. **Confirm the package price** (next steps, item 3).
 
 ## Preview locally
 
@@ -170,8 +169,13 @@ For the design doc, run the same command from `design-system/`.
   photo placeholder and no "View larger". They look the same but aren't clickable, and
   `main.js` skips them. When the photo arrives, turn the card into a `<button class="sig-tile">`
   copied from the others: photo, "View larger" label and `aria-label`.
-- **The package grid** has 3 columns on desktop (6 cards = 2 rows) and 2 columns at 992px
-  and below.
+- **The package grid** holds 5 cards: arch, centrepieces, runner, plinths, welcome board.
+  - **Above 720px** it's a 6-column grid. The first three cards span 2 columns each, making a
+    row of 3. Cards with `.sig-wide` (plinths, welcome board) span 3 each, making a row of 2
+    at half width, with 5:4 photos so both rows are about the same height. The plinth photo
+    uses `.crop-high` (`object-position: 50% 30%`) to keep its spires in frame.
+  - **At 720px and below** it's 2 columns. An odd last card (the welcome board) spans the full
+    width with a 5:4 photo, so there's no lone card beside an empty space.
 
 ## Next steps
 
@@ -179,24 +183,18 @@ Visible to visitors — fix before launch:
 1. **The enquiry form doesn't send anything.** It shows "Thank you! I'll be in touch within 24
    hours." but the message goes nowhere. It needs a real form handler. The inputs already have
    `name` attributes: `name`, `email`, `planning`, `date`, `venue`, `ideas`.
-2. **Ten photo placeholders** need photos:
-   - **Weddings package cards,** 4:5 portrait, supply 1000×1250 px: welcome board, aisle
-     marker. These are shown at up to 424×530; 1000px wide matches the other package photos,
-     which the lightbox shows close to full size.
+2. **Nine photo placeholders** need photos:
+   - **Weddings package, welcome board,** 5:4 landscape, supply 1250×1000 px. It's shown at up
+     to 600×480 (full width at 720px). 1000px tall matches the other package photos, which
+     the lightbox shows close to full size.
    - **Weddings add-ons,** shown at 80×80, supply at least 160×160 px square: extra table
      centrepiece, statement plinth arrangement, aisle arrangement, moving pieces from ceremony
      to reception.
    - **Business service cards,** 16:11 landscape, supply at least 1200×825 px: monthly flower
      subscription, seasonal subscription, permanent installations, event flowers.
-3. **The package now has 6 items, which is unconfirmed.** "Welcome board" and "Aisle marker"
-   were added with "[number]" captions. Once the quantities are confirmed:
-   - Update the captions.
-   - Update the weddings meta and `og:description`, which still list "arch, centrepieces, top
-     table runner and plinths".
-   - Check that "aisle marker" (included) is clearly different from the "Aisle arrangement"
-     add-on and the FAQ's "aisle arrangements".
-   - Confirm the price is still £495 / £395.
-   - Update `docs/content-brief.md`.
+3. **Confirm the package price.** The package now includes a welcome board, but the price is
+   unchanged pending confirmation. It's £495 (£395 with the founding offer) in the package
+   section, offer panel, weddings meta and share text, and the Home card's "from £495".
 4. **A wording point for the owner** (currently used as written). The Business closing section
    says "I'll be in touch within 24 hours to arrange a free visit" and its buttons say "Book a
    free visit". The Pricing and FAQ copy say visits are free only across Worthing, Brighton and

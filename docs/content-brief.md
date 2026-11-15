@@ -73,7 +73,7 @@ Use only the button labels given in this file. At the moment the site uses lots 
 - Home `<title>`: **Bonny Forever Floral Design | Faux Flower Hire in West Sussex**
 - Home meta description: **Real-touch faux flower hire for weddings, celebrations and businesses in West Sussex. Delivered, styled and collected by Nina.**
 - Weddings `<title>`: **Wedding Flower Hire | Bonny Forever Floral Design**
-- Weddings meta description: **The Bonny Signature wedding flower package: arch, centrepieces, top table runner and plinths, delivered, styled and collected. £495 for the day.**
+- Weddings meta description: **The Bonny Signature wedding flower package: arch, centrepieces, top table runner, plinths and welcome board, delivered, styled and collected. £495 for the day.**
 - Business `<title>`: **Faux Flowers for Businesses | Bonny Forever Floral Design**
 - Business meta description: **Real-touch faux flower subscriptions and installations for restaurants, bars, shops, salons and offices across Sussex, Surrey and Kent. From £50 a month.**
 - Every image needs meaningful alt text. Some images currently have empty alt text.
@@ -257,13 +257,15 @@ Everything you need to dress your ceremony and reception, all in one simple pack
 
 **£495 for the day** [small text next to it: (introductory price)]
 
-[Keep the existing photo cards for each item. Use these captions]
+[Keep the existing photo cards for each item. Use these captions. The welcome board photo will be supplied later]
 
 - 1 floral arch for your ceremony
 - 5 table centrepieces
 - 1 top table runner
 - 2 statement plinth arrangements
-- Delivery, setup and collection
+- 1 welcome board
+
+[Shown as a line beneath the photo cards] Delivery, setup and collection
 
 Perfect for weddings, and just as lovely for christenings, anniversaries, birthdays and parties.
 
