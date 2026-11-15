@@ -6,10 +6,8 @@ no build step, no framework, no npm.
 
 ## Current status (15 Nov 2026)
 
-- **Live preview:** https://bonny-forever.vercel.app, deployed from `main`.
-- **In review (15 Nov 2026):** branch `home-hero` (new Home hero photo). This file already
-  describes it. When it's merged into `main` and the branch is deleted, change this back to
-  "Everything below is merged and live there. There are no other branches."
+- **Live preview:** https://bonny-forever.vercel.app, deployed from `main`. Everything below is
+  merged and live there. There are no other branches.
 - **Not launched yet.** The real domain isn't connected, and the pre-launch checklist below is
   still open.
 - **History** (key commits on `main`):
