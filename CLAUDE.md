@@ -6,8 +6,11 @@ no build step, no framework, no npm.
 
 ## Current status (15 Nov 2026)
 
-- **Live preview:** https://bonny-forever.vercel.app, deployed from `main`. Everything below is
-  merged and live there. There are no other branches.
+- **Live preview:** https://bonny-forever.vercel.app, deployed from `main`.
+- **In review (15 Nov 2026):** branch `weddings-add-ons-arch` (new arch photo, 3 add-on cards
+  with photos, moving pieces as a line). This file already describes it. When it's merged into
+  `main` and the branch is deleted, change this back to "Everything below is merged and live
+  there. There are no other branches."
 - **Not launched yet.** The real domain isn't connected, and the pre-launch checklist below is
   still open.
 - **History** (key commits on `main`):
@@ -23,6 +26,9 @@ no build step, no framework, no npm.
     added; aisle markers are an add-on, not part of the package.
   - `4265ed7` to `1512ebf` Welcome board photos in. The add-ons became photo cards, with the
     aisle arrangement photos in. The lightbox keeps keyboard focus inside while it's open.
+  - `b319260`, `5aabcda` New floral arch photo (`floral-arch-ivory-roses.jpg` replaced
+    `floral-arch-side.jpg`). The add-ons became 3 cards with photos, and "Moving pieces" a
+    line beneath them.
 
 ## Pre-launch checklist (all open)
 
@@ -30,17 +36,11 @@ no build step, no framework, no npm.
    sends nothing. It needs a real form handler (ask Adam before choosing or adding a
    third-party service). The inputs already have `name` attributes: `name`, `email`,
    `planning`, `date`, `venue`, `ideas`.
-2. **Replace the 7 photo placeholders.** Sizes to supply:
-   - **Weddings add-ons (3), any shape, at least 1000×1000 px:** extra table centrepiece,
-     statement plinth arrangement, moving pieces from ceremony to reception.
-     - The card crops the photo square and shows it at up to 250×250 (about 308×308 on
-       tablets). The lightbox shows the whole photo.
-     - Make the web copy about 1000–1200px on its long side, like the aisle photos.
+2. **Replace the 4 photo placeholders,** all on Business. Weddings has none left.
    - **Business service cards (4), 16:11 landscape, at least 1200×825 px:** monthly flower
      subscription, seasonal subscription, permanent installations, event flowers.
 
-   How to swap them in: add-ons under "Add-on cards", Business under "Photo placeholders"
-   (both below, in "Shared components").
+   How to swap them in is under "Photo placeholders" in "Shared components" below.
 3. **Confirm the package price.** The package gained a welcome board, but the price is
    unchanged pending Nina's confirmation: £495, or £395 with the founding offer. If it
    changes, update every place listed under "Where prices and offers appear".
@@ -113,7 +113,8 @@ CLAUDE.md, .gitignore  ← Repo root, not deployed.
   - Business Pricing.
   - The Business meta description and `og:description`.
 - **Other prices:** bespoke "from £695" (Weddings heading and text), the add-on prices
-  (Weddings add-on cards), and the £50 for moving pieces (add-on cards and FAQ).
+  (Weddings add-on cards), and the £50 for moving pieces (the line beneath the add-on cards,
+  and the FAQ).
 - **Package contents** appear in:
   - the Weddings package cards;
   - the Weddings meta description and `og:description` ("arch, centrepieces, top table runner,
@@ -214,10 +215,10 @@ For the design doc, run the same command from `design-system/`.
   - Fonts are Fraunces (headings) and Jost (body), loaded from Google Fonts in each page's
     `<head>`.
 - **Breakpoints:**
-  - **992px:** nav becomes the menu button, most grids stack, and the weddings add-on cards
-    go 2 across.
+  - **992px:** nav becomes the menu button, and most grids stack.
   - **768px:** the Home explore cards stack.
-  - **720px:** the weddings package grid becomes 2 columns.
+  - **720px:** the weddings package grid and add-on cards become 2 columns, with an odd last
+    card full width.
   - **560px:** small-phone tweaks (highlights, banner text, footer, Business grids, compact
     package and add-on cards).
 - **JS:** `main.js` loads on every page, so each feature lives in its own
@@ -265,13 +266,12 @@ For the design doc, run the same command from `design-system/`.
 | Service cards | `.service-grid > article.service-card` | Business |
 | FAQ accordion | `.faq-list > details.faq-item > summary > h3` + `.faq-a` | Weddings, Business |
 | Closing band | `section.cta-band` | Weddings, Business |
-| Photo placeholder | `span.photo-placeholder` ("Photo to come" + size) | Weddings, Business |
+| Photo placeholder | `span.photo-placeholder` ("Photo to come" + size) | Business |
 
 - **FAQ accordion:** uses the browser's own `<details>`/`<summary>`. Keyboard (Tab, Enter/Space)
   and screen-reader support are built in, and it needs no JavaScript.
 - **Photo placeholders:** when the photo arrives, replace the `<span class="photo-placeholder">`
-  with an `<img>` that has width, height, alt and `loading="lazy"`. Weddings add-ons are
-  different: see "Add-on cards" below.
+  with an `<img>` that has width, height, alt and `loading="lazy"`.
 - **Lightbox** (weddings only): each package card (`button.sig-tile`) and add-on photo
   (`button.addon-photo`) opens its own photo.
   - Add a second photo with `data-extra-src` and `data-extra-alt`. The floral arch, welcome
@@ -281,7 +281,7 @@ For the design doc, run the same command from `design-system/`.
   - Focus moves to Close on open and back to the photo on close. Arrow keys and Escape work.
     Tab and Shift+Tab cycle through the lightbox's buttons and never reach the page behind.
 - **The package grid** holds 5 cards, all with photos: arch, centrepieces, runner, plinths,
-  welcome board.
+  welcome board. The arch photo is square; its 4:5 card crop trims only the outermost leaves.
   "Delivery, setup and collection" is the line beneath (`.sig-included`).
   - **Above 720px** it's a 6-column grid. The first three cards span 2 columns each, making a
     row of 3. Cards with `.sig-wide` (plinths, welcome board) span 3 each, making a row of 2 at
@@ -291,18 +291,26 @@ For the design doc, run the same command from `design-system/`.
     in frame.
   - **At 720px and below** it's 2 columns. An odd last card (the welcome board) spans the full
     width with a 5:4 photo, so there's no lone card beside an empty space.
-- **Add-on cards** (`#add-ons`; weddings only, so the CSS is in `weddings.css`):
-  `ul.addon-grid > li.addon-card`, each holding `h3.addon-name`, `p.addon-price`, then the photo.
+- **Add-on cards** (`#add-ons`; weddings only, so the CSS is in `weddings.css`): 3 cards
+  (extra table centrepiece, statement plinth arrangement, aisle arrangement) in
+  `ul.addon-grid > li.addon-card`. Each holds `h3.addon-name`, `p.addon-price`, then the photo.
   - The photo comes last in the HTML, so screen readers hear the name and price first. CSS
     (`order: -1`) shows it first.
-  - Above 992px they're 4 across, with photos up to 250×250, spread to the full width. At
-    992px and below they're 2 across.
-  - **With a photo:** `<button class="addon-photo">` holding the `<img>` and "View larger",
-    with `aria-label="View larger: <name>"`. Copy the aisle arrangement card. CSS crops the
-    photo square, so supply one file about 1000–1200px, any shape, and the lightbox shows
-    the whole photo.
-  - **Without a photo yet:** `<span class="addon-photo">` holding the placeholder. It isn't a
-    button, so it can't be clicked or focused, and `main.js` skips it.
+  - **Above 720px** they're 3 across, filling the width (photos about 357px square at 1440,
+    231px at 820). **At 720px and below** it's 2 columns, and an odd last card (the aisle
+    arrangement) spans the full width with a 5:4 photo, like the package grid.
+  - Each photo is a `<button class="addon-photo">` holding the `<img>` and "View larger",
+    with `aria-label="View larger: <name>"`. The aisle arrangement has a second photo.
+  - **The centrepiece and plinth cards reuse the package photos** (`centrepiece-white-roses.jpg`,
+    `statement-plinth-white.jpg`): the same files, not copies, with the same alt text. To
+    give one its own photo, swap the `src`, `alt`, `width` and `height`. CSS crops the card
+    photo, so supply one file about 1000–1200px, any shape; the lightbox shows all of it.
+  - No add-on has a placeholder now. If one ever needs one again, use a
+    `<span class="addon-photo">` (not a button, so `main.js` skips it) holding the
+    placeholder, and add back `.addon-photo .photo-placeholder{width:100%;height:100%;border-radius:inherit}`.
+  - **"Moving pieces from your ceremony to your reception"** has no photo. It's a line
+    beneath the cards (`p.addon-line`), sharing the style of "Delivery, setup and collection"
+    (`.sig-included`), with its price in `.addon-line-price` on the right.
 
 ## Working notes (for Claude)
 
@@ -374,3 +382,7 @@ For the design doc, run the same command from `design-system/`.
    The 5:4 card crop is 900×720, against the 1250×1000 asked for, so it's a little soft on
    retina desktops and tablets. Ask Nina for the originals straight from her phone, and swap
    them in at the same file names.
+10. **The centrepiece and plinth add-ons reuse the package photos,** so the same two photos
+    appear twice on the Weddings page. Their own shots would serve them better: for example,
+    a single extra centrepiece on a guest table, and one plinth arrangement on its stand.
+    See "Add-on cards" for how to swap them in.

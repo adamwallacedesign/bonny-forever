@@ -289,7 +289,7 @@ Every venue is different, so once you get in touch we'll have a chat about timin
 
 Got a bigger guest list or a larger venue? You can add extra pieces to your package, all in the same soft whites, creams and greenery:
 
-[Show as cards in a grid: a square photo, then the item, then the price. Four across on desktop, two across on tablets and phones]
+[Show the first three as cards in a grid: a square photo, then the item, then the price. Three across on desktop and tablets; on phones, two across with the third card full width. Show "Moving pieces from your ceremony to your reception" and its price as a line beneath the cards, in the same style as "Delivery, setup and collection" in the package]
 
 | Add-on | Price |
 |---|---|
@@ -304,7 +304,7 @@ Just mention what you'd like when you get in touch, and I'll include it in your 
 
 [Button, links to index.html#contact] Add to my enquiry
 
-[Each card's photo opens larger when clicked. The aisle arrangement photos are in; the other three add-ons show a placeholder until their photos are supplied.]
+[Each card's photo opens larger when clicked. The centrepiece and plinth cards use the package photos for now.]
 
 #### 7. Bespoke floral styling (`id="bespoke"`)
 
