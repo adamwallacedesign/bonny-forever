@@ -48,7 +48,7 @@
 })();
 
 /* Bonny Signature photo lightbox (weddings.html). Each .sig-tile opens its own photo; a tile
-   can add one more with data-extra-src and data-extra-alt (the floral arch does). The large
+   can add one more with data-extra-src and data-extra-alt (the floral arch and welcome board do). The large
    <img> is only created when a photo opens, so the page never holds an empty image, and
    every photo and thumbnail carries real alt text. */
 (function(){
@@ -87,7 +87,6 @@
     lb.classList.remove('open'); document.body.style.overflow='';
     if(opener) opener.focus(); // back to the photo that was opened
   }
-  // Only the photo cards are buttons; cards still waiting for a photo (.sig-tile-static) are skipped
   document.querySelectorAll('button.sig-tile').forEach(function(t){ t.addEventListener('click',function(){ open(t); }); });
   closeBtn.addEventListener('click',close);
   prev.addEventListener('click',function(){ show(i-1); });
