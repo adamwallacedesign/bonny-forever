@@ -47,10 +47,11 @@
   }
 })();
 
-/* Bonny Signature photo lightbox (weddings.html). Each .sig-tile opens its own photo; a tile
-   can add one more with data-extra-src and data-extra-alt (the floral arch and welcome board do). The large
-   <img> is only created when a photo opens, so the page never holds an empty image, and
-   every photo and thumbnail carries real alt text. */
+/* Photo lightbox (weddings.html). Each package card (button.sig-tile) and add-on photo
+   (button.addon-photo) opens its own photo; one can add a second with data-extra-src and
+   data-extra-alt (the floral arch, welcome board and aisle arrangement do). The large <img>
+   is only created when a photo opens, so the page never holds an empty image, and every
+   photo and thumbnail carries real alt text. */
 (function(){
   var lb=document.getElementById('lb');
   if(!lb)return; // lightbox only exists on weddings.html
@@ -70,7 +71,7 @@
     lb.classList.toggle('multi',!single);
   }
   function open(tile){
-    var main=tile.querySelector('.sig-photo img');
+    var main=tile.querySelector('img');
     photos=[{src:main.currentSrc||main.src, alt:main.alt}];
     if(tile.dataset.extraSrc) photos.push({src:tile.dataset.extraSrc, alt:tile.dataset.extraAlt});
     thumbs.innerHTML='';
@@ -87,7 +88,7 @@
     lb.classList.remove('open'); document.body.style.overflow='';
     if(opener) opener.focus(); // back to the photo that was opened
   }
-  document.querySelectorAll('button.sig-tile').forEach(function(t){ t.addEventListener('click',function(){ open(t); }); });
+  document.querySelectorAll('button.sig-tile, button.addon-photo').forEach(function(t){ t.addEventListener('click',function(){ open(t); }); });
   closeBtn.addEventListener('click',close);
   prev.addEventListener('click',function(){ show(i-1); });
   next.addEventListener('click',function(){ show(i+1); });

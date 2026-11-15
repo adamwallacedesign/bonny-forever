@@ -732,24 +732,7 @@ footer.site-footer {
 .offer-panel h2 em { font-style: italic; font-weight: 340; color: var(--grape); }
 .offer-panel p { max-width: 70ch; font-size: 17px; line-height: 1.7; opacity: 0.92; }
 
-/* PRICE LIST (Weddings add-ons): photo, item, price */
-.price-list { list-style: none; border-top: var(--rule); margin-bottom: 28px; }
-.price-row {
-  display: grid;
-  grid-template-columns: 80px 1fr auto;
-  gap: 24px;
-  align-items: center;
-  padding: 18px 0;
-  border-bottom: var(--rule);
-}
-.price-item { font-size: 16.5px; color: var(--ink); }
-.price-cost {
-  font-family: var(--disp);
-  font-size: 20px;
-  font-weight: 500;
-  color: var(--grape);
-  text-align: right;
-}
+/* Notes under the Weddings add-on cards */
 .price-note { max-width: 70ch; margin-bottom: 14px; opacity: 0.9; }
 .price-note:last-of-type { margin-bottom: 28px; }
 
@@ -772,8 +755,6 @@ footer.site-footer {
   text-transform: uppercase;
 }
 .photo-placeholder small { font-size: 11px; font-weight: 500; letter-spacing: 0.04em; text-transform: none; }
-.price-thumb { width: 80px; height: 80px; padding: 6px; font-size: 8.5px; letter-spacing: 0.1em; }
-.price-thumb small { font-size: 9.5px; }
 
 /* FAQ ACCORDION: native <details>/<summary>, so keyboard (Tab, Enter/Space) and
    screen-reader support are built in, and it works without JavaScript */
@@ -863,9 +844,6 @@ footer.site-footer {
   .offer-banner { font-size: 12.5px; padding: 9px 20px; }
   .footer-bottom { flex-direction: column; gap: 8px; }
   .service-grid, .why-points.two-col, .process-grid.four { grid-template-columns: 1fr; }
-  .price-row { grid-template-columns: 64px 1fr; gap: 6px 16px; }
-  .price-thumb { width: 64px; height: 64px; grid-row: span 2; font-size: 7.5px; }
-  .price-cost { text-align: left; font-size: 18px; }
   .faq-a { padding-right: 0; }
   .faq-item summary h3 { font-size: 19px; }
 }

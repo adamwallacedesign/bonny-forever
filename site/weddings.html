@@ -156,26 +156,33 @@
       <h2 class="sec-title">Need a little <em>more?</em></h2>
       <p class="lead">Got a bigger guest list or a larger venue? You can add extra pieces to your package, all in the same soft whites, creams and greenery:</p>
     </div>
-    <ul class="price-list">
-      <li class="price-row">
-        <span class="photo-placeholder price-thumb" aria-hidden="true">Photo to come<small>160 &times; 160</small></span>
-        <span class="price-item">Extra table centrepiece (low arrangement, vase included)</span>
-        <span class="price-cost">£25 each</span>
+    <!-- Each card: name, price, then the photo (shown first by CSS, so screen readers hear the
+         name before the "View larger" button). An add-on without a photo yet has a plain
+         placeholder in place of the button, so it isn't clickable. -->
+    <ul class="addon-grid">
+      <li class="addon-card">
+        <h3 class="addon-name">Extra table centrepiece (low arrangement, vase included)</h3>
+        <p class="addon-price">£25 each</p>
+        <span class="addon-photo"><span class="photo-placeholder" aria-hidden="true">Photo to come<small>1000 &times; 1000</small></span></span>
       </li>
-      <li class="price-row">
-        <span class="photo-placeholder price-thumb" aria-hidden="true">Photo to come<small>160 &times; 160</small></span>
-        <span class="price-item">Statement plinth arrangement (stand included)</span>
-        <span class="price-cost">£50 each, or £80 for a pair</span>
+      <li class="addon-card">
+        <h3 class="addon-name">Statement plinth arrangement (stand included)</h3>
+        <p class="addon-price">£50 each, or £80 for a pair</p>
+        <span class="addon-photo"><span class="photo-placeholder" aria-hidden="true">Photo to come<small>1000 &times; 1000</small></span></span>
       </li>
-      <li class="price-row">
-        <span class="photo-placeholder price-thumb" aria-hidden="true">Photo to come<small>160 &times; 160</small></span>
-        <span class="price-item">Aisle arrangement</span>
-        <span class="price-cost">£35 each</span>
+      <li class="addon-card">
+        <h3 class="addon-name">Aisle arrangement</h3>
+        <p class="addon-price">£35 each</p>
+        <button type="button" class="addon-photo" aria-label="View larger: Aisle arrangement"
+                data-extra-src="images/aisle-arrangement-closeup.jpg"
+                data-extra-alt="Close-up of the aisle arrangement: ivory roses, a pale green rosebud and white cosmos among dark green leaves">
+          <img src="images/aisle-arrangement-ivory-roses.jpg" alt="Low faux aisle arrangement of ivory roses, white cosmos, cream stocks and white sweet peas with trailing greenery" width="1200" height="1002" loading="lazy"><span class="sig-zoom">View larger</span>
+        </button>
       </li>
-      <li class="price-row">
-        <span class="photo-placeholder price-thumb" aria-hidden="true">Photo to come<small>160 &times; 160</small></span>
-        <span class="price-item">Moving pieces from your ceremony to your reception</span>
-        <span class="price-cost">£50</span>
+      <li class="addon-card">
+        <h3 class="addon-name">Moving pieces from your ceremony to your reception</h3>
+        <p class="addon-price">£50</p>
+        <span class="addon-photo"><span class="photo-placeholder" aria-hidden="true">Photo to come<small>1000 &times; 1000</small></span></span>
       </li>
     </ul>
     <p class="price-note">Just mention what you&rsquo;d like when you get in touch, and I&rsquo;ll include it in your quote.</p>
@@ -280,7 +287,7 @@
   </div>
 </footer>
 
-<!-- PHOTO LIGHTBOX (opened by the package photos; the photo itself is added by js/main.js) -->
+<!-- PHOTO LIGHTBOX (opened by the package and add-on photos; the photo itself is added by js/main.js) -->
 <div id="lb" role="dialog" aria-modal="true" aria-label="Larger photo">
   <div class="lb-inner">
     <div class="lb-head"><button type="button" class="lb-btn" id="lbClose" aria-label="Close">&times;</button></div>
