@@ -6,8 +6,10 @@ no build step, no framework, no npm.
 
 ## Current status (15 Nov 2026)
 
-- **Live preview:** https://bonny-forever.vercel.app, deployed from `main`. Everything below is
-  merged and live there. There are no other branches.
+- **Live preview:** https://bonny-forever.vercel.app, deployed from `main`.
+- **In review (15 Nov 2026):** branch `home-hero` (new Home hero photo). This file already
+  describes it. When it's merged into `main` and the branch is deleted, change this back to
+  "Everything below is merged and live there. There are no other branches."
 - **Not launched yet.** The real domain isn't connected, and the pre-launch checklist below is
   still open.
 - **History** (key commits on `main`):
@@ -26,6 +28,8 @@ no build step, no framework, no npm.
   - `b319260` to `7af65f9` New floral arch photo (`floral-arch-ivory-roses.jpg` replaced
     `floral-arch-side.jpg`); its lightbox now shows just that photo. The add-ons became 3
     cards with photos, and "Moving pieces" a line beneath them.
+  - `484ae8a` New Home hero photo (`pink-heather-moorland.jpg` replaced
+    `centrepiece-peach-roses.jpg`, which stays in the Home gallery).
 
 ## Pre-launch checklist (all open)
 
@@ -294,6 +298,18 @@ For the design doc, run the same command from `design-system/`.
   and screen-reader support are built in, and it needs no JavaScript.
 - **Photo placeholders:** when the photo arrives, replace the `<span class="photo-placeholder">`
   with an `<img>` that has width, height, alt and `loading="lazy"`.
+- **Hero photos** (`.hero-bg img`): `object-fit: cover` under a dark gradient overlay, and
+  never `loading="lazy"` (they're on the first screen).
+  - **Home:** `pink-heather-moorland.jpg` (1774×887), behind the full-screen hero (94% of the
+    window height).
+    - Laptops and big screens show 85–95% of its width. Tablets (820px) show only the middle
+      37%, and phones (390px) only the middle quarter.
+    - The default centred crop is deliberate. Shifting it right puts the sharp heather
+      sprigs behind the hero text on phones and makes the paragraph harder to read.
+  - **Weddings:** `wedding-reception-hollyclark.webp`, the short hero, to be replaced before
+    launch (pre-launch checklist item 7).
+  - The Home share image (`images/social/share-home.jpg`) is still cut from the old Home
+    hero photo, the peach roses centrepiece. Ask Adam before changing it.
 - **Lightbox** (weddings only): each package card (`button.sig-tile`) and add-on photo
   (`button.addon-photo`) opens its own photo.
   - **One photo is the default.** The lightbox shows the card's own `<img>` and hides the
@@ -417,3 +433,7 @@ For the design doc, run the same command from `design-system/`.
    appear twice on the Weddings page. Their own shots would serve them better: for example,
    a single extra centrepiece on a guest table, and one plinth arrangement on its stand.
    See "Add-on cards" for how to swap them in.
+10. **The Home hero photo is only 1774×887.** The hero fills the screen, so the photo is
+    stretched about 1.5× on 2560px monitors, and it's a little soft on retina laptops and
+    phones. A larger original (at least 2880px wide) would be sharper. Swap it in at the same
+    file name, and update `width` and `height`.
