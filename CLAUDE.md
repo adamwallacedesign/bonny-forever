@@ -6,8 +6,10 @@ no build step, no framework, no npm.
 
 ## Current status (15 Nov 2026)
 
-- **Live preview:** https://bonny-forever.vercel.app, deployed from `main`. Everything below is
-  merged and live there. There are no other branches.
+- **Live preview:** https://bonny-forever.vercel.app, deployed from `main`.
+- **In review (15 Nov 2026):** branch `weddings-photos` (welcome board and aisle photos, add-on
+  cards, lightbox focus fix). This file already describes it. When it's merged into `main` and
+  the branch is deleted, remove this line.
 - **Not launched yet.** The real domain isn't connected, and the pre-launch checklist below is
   still open.
 - **History** (key commits on `main`):
@@ -21,6 +23,8 @@ no build step, no framework, no npm.
     Home, Weddings, Business rebuilt.
   - `91c4c81`, `aaa6ec2` The Bonny Signature package became 5 cards. A welcome board was
     added; aisle markers are an add-on, not part of the package.
+  - `4265ed7` to `1512ebf` Welcome board photos in. The add-ons became photo cards, with the
+    aisle arrangement photos in. The lightbox keeps keyboard focus inside while it's open.
 
 ## Pre-launch checklist (all open)
 
@@ -28,17 +32,17 @@ no build step, no framework, no npm.
    sends nothing. It needs a real form handler (ask Adam before choosing or adding a
    third-party service). The inputs already have `name` attributes: `name`, `email`,
    `planning`, `date`, `venue`, `ideas`.
-2. **Replace the 9 photo placeholders.** Sizes to supply:
-   - **Weddings package, welcome board:** 5:4 landscape, 1250×1000 px. It's shown at up to
-     600×480. 1000px tall matches the other package photos, which the lightbox shows near
-     full size.
-   - **Weddings add-ons (4), square, at least 160×160 px:** extra table centrepiece, statement
-     plinth arrangement, aisle arrangement, moving pieces from ceremony to reception. Shown
-     at 80×80.
+2. **Replace the 7 photo placeholders.** Sizes to supply:
+   - **Weddings add-ons (3), any shape, at least 1000×1000 px:** extra table centrepiece,
+     statement plinth arrangement, moving pieces from ceremony to reception.
+     - The card crops the photo square and shows it at up to 250×250 (about 308×308 on
+       tablets). The lightbox shows the whole photo.
+     - Make the web copy about 1000–1200px on its long side, like the aisle photos.
    - **Business service cards (4), 16:11 landscape, at least 1200×825 px:** monthly flower
      subscription, seasonal subscription, permanent installations, event flowers.
 
-   How to swap them in is under "Shared components" below.
+   How to swap them in: add-ons under "Add-on cards", Business under "Photo placeholders"
+   (both below, in "Shared components").
 3. **Confirm the package price.** The package gained a welcome board, but the price is
    unchanged pending Nina's confirmation: £495, or £395 with the founding offer. If it
    changes, update every place listed under "Where prices and offers appear".
@@ -69,7 +73,7 @@ site/                  ← THE WEBSITE. Only this folder gets deployed.
   weddings.html          Weddings (Bonny Signature package, add-ons, FAQ, photo lightbox)
   commercial.html        Business. The nav says "Business"; the file name stays commercial.html.
   css/styles.css         Shared by every page: layout, header, footer and all shared components
-  css/weddings.css       weddings.html only: package cards, "The look" layout, lightbox
+  css/weddings.css       weddings.html only: package cards, "The look" layout, add-on cards, lightbox
   js/main.js             Every page: mobile menu, enquiry form, ?enquiry= pre-select, lightbox
   images/                All site photos and the logo, optimised for the web
   images/social/         1200×630 share images used by og:image (share-home/-weddings/-commercial)
@@ -111,7 +115,7 @@ CLAUDE.md, .gitignore  ← Repo root, not deployed.
   - Business Pricing.
   - The Business meta description and `og:description`.
 - **Other prices:** bespoke "from £695" (Weddings heading and text), the add-on prices
-  (Weddings price list), and the £50 for moving pieces (price list and FAQ).
+  (Weddings add-on cards), and the £50 for moving pieces (add-on cards and FAQ).
 - **Package contents** appear in:
   - the Weddings package cards;
   - the Weddings meta description and `og:description` ("arch, centrepieces, top table runner,
@@ -192,8 +196,9 @@ For the design doc, run the same command from `design-system/`.
   3. Keep the colour profile. Many photos are Display P3 (iPhone). A tool that drops the
      profile makes oranges and pinks look duller on Apple screens. See "Working notes" for
      how the current images were encoded.
-  4. Lightbox photos (weddings `button.sig-tile`) display at their natural pixel size on big
-     screens, so don't shrink those below their current dimensions.
+  4. Lightbox photos (weddings `button.sig-tile` and `button.addon-photo`) display at their
+     natural pixel size on big screens (up to 92% of the window's width and 88% of its
+     height), so don't shrink those below their current dimensions (about 1000px).
 - **Every `<img>`:**
   - `width` and `height` set to its real pixel size, which prevents layout shift.
     `img { height: auto; }` in `styles.css` stops the height attribute fighting CSS that only
@@ -211,11 +216,12 @@ For the design doc, run the same command from `design-system/`.
   - Fonts are Fraunces (headings) and Jost (body), loaded from Google Fonts in each page's
     `<head>`.
 - **Breakpoints:**
-  - **992px:** nav becomes the menu button, and most grids stack.
+  - **992px:** nav becomes the menu button, most grids stack, and the weddings add-on cards
+    go 2 across.
   - **768px:** the Home explore cards stack.
   - **720px:** the weddings package grid becomes 2 columns.
-  - **560px:** small-phone tweaks (highlights, banner text, footer, price list, Business grids,
-    compact package cards).
+  - **560px:** small-phone tweaks (highlights, banner text, footer, Business grids, compact
+    package and add-on cards).
 - **JS:** `main.js` loads on every page, so each feature lives in its own
   `(function(){ … })();` block that returns early if its element isn't on the page.
 
@@ -259,7 +265,6 @@ For the design doc, run the same command from `design-system/`.
 | Dark "why" band | `section.why-faux` with `.why-points` (add `.two-col` for a 2×2 grid without a photo) | Home, Business |
 | Numbered steps | `ol.process-grid > li.process-step` (add `.four` for four steps) | Home, Business |
 | Service cards | `.service-grid > article.service-card` | Business |
-| Price list | `ul.price-list > li.price-row` (thumb, item, price) | Weddings add-ons |
 | FAQ accordion | `.faq-list > details.faq-item > summary > h3` + `.faq-a` | Weddings, Business |
 | Closing band | `section.cta-band` | Weddings, Business |
 | Photo placeholder | `span.photo-placeholder` ("Photo to come" + size) | Weddings, Business |
@@ -267,25 +272,39 @@ For the design doc, run the same command from `design-system/`.
 - **FAQ accordion:** uses the browser's own `<details>`/`<summary>`. Keyboard (Tab, Enter/Space)
   and screen-reader support are built in, and it needs no JavaScript.
 - **Photo placeholders:** when the photo arrives, replace the `<span class="photo-placeholder">`
-  with an `<img>` that has width, height, alt and `loading="lazy"`.
-- **Lightbox** (weddings only): each `button.sig-tile` opens its own photo.
-  - Add a second photo with `data-extra-src` and `data-extra-alt` (the floral arch has one).
+  with an `<img>` that has width, height, alt and `loading="lazy"`. Weddings add-ons are
+  different: see "Add-on cards" below.
+- **Lightbox** (weddings only): each package card (`button.sig-tile`) and add-on photo
+  (`button.addon-photo`) opens its own photo.
+  - Add a second photo with `data-extra-src` and `data-extra-alt`. The floral arch, welcome
+    board and aisle arrangement have one. Only one extra photo is supported.
   - The large image is created by `main.js` when it opens, so there is never an empty `<img>`
     in the page.
-  - Focus moves to Close on open and back to the card on close. Arrow keys and Escape work.
-- **Package cards without a photo yet** (the welcome board) are
-  `<div class="sig-tile sig-tile-static">`, with a placeholder and no "View larger".
-  - They look the same but aren't clickable, and `main.js` skips them.
-  - When the photo arrives, turn the card into a `<button class="sig-tile">` copied from the
-    plinth card: photo, "View larger", `aria-label`, and keep `.sig-wide`.
-- **The package grid** holds 5 cards: arch, centrepieces, runner, plinths, welcome board.
+  - Focus moves to Close on open and back to the photo on close. Arrow keys and Escape work.
+    Tab and Shift+Tab cycle through the lightbox's buttons and never reach the page behind.
+- **The package grid** holds 5 cards, all with photos: arch, centrepieces, runner, plinths,
+  welcome board.
   "Delivery, setup and collection" is the line beneath (`.sig-included`).
   - **Above 720px** it's a 6-column grid. The first three cards span 2 columns each, making a
     row of 3. Cards with `.sig-wide` (plinths, welcome board) span 3 each, making a row of 2 at
     half width, with 5:4 photos so both rows are about the same height. The plinth photo uses
-    `.crop-high` (`object-position: 50% 30%`) to keep its spires in frame.
+    `.crop-high` (`object-position: 50% 30%`) to keep its spires in frame. The welcome board
+    photo is portrait; `.crop-welcome` (`50% 35%`) keeps the "Welcome" lettering and the roses
+    in frame.
   - **At 720px and below** it's 2 columns. An odd last card (the welcome board) spans the full
     width with a 5:4 photo, so there's no lone card beside an empty space.
+- **Add-on cards** (`#add-ons`; weddings only, so the CSS is in `weddings.css`):
+  `ul.addon-grid > li.addon-card`, each holding `h3.addon-name`, `p.addon-price`, then the photo.
+  - The photo comes last in the HTML, so screen readers hear the name and price first. CSS
+    (`order: -1`) shows it first.
+  - Above 992px they're 4 across, with photos up to 250×250, spread to the full width. At
+    992px and below they're 2 across.
+  - **With a photo:** `<button class="addon-photo">` holding the `<img>` and "View larger",
+    with `aria-label="View larger: <name>"`. Copy the aisle arrangement card. CSS crops the
+    photo square, so supply one file about 1000–1200px, any shape, and the lightbox shows
+    the whole photo.
+  - **Without a photo yet:** `<span class="addon-photo">` holding the placeholder. It isn't a
+    button, so it can't be clicked or focused, and `main.js` skips it.
 
 ## Working notes (for Claude)
 
@@ -314,6 +333,13 @@ For the design doc, run the same command from `design-system/`.
   - Navigating to the same page with only a different `#hash` fires no load event.
   - Chrome renders photos with small run-to-run differences (up to about 20 levels out of 255),
     so compare non-photo areas strictly and photo areas with tolerance.
+  - The page scrolls smoothly, so after `focus()` or `scrollIntoView()` wait about a second
+    before a screenshot. Or set `document.documentElement.style.scrollBehavior = 'auto'` in
+    the test.
+  - Navigating headless Chrome to the exact same URL again can hang waiting for the load
+    event. Add a dummy query string (`weddings.html?w=390`).
+  - A test script that crashes can leave headless Chrome holding its debugging port. Stop it
+    with `pkill -f "remote-debugging-port=<port>"`.
   - macOS has no `timeout` command.
   - zsh treats `=====` specially in echo.
 - **How the current images were encoded:**
@@ -322,6 +348,9 @@ For the design doc, run the same command from `design-system/`.
     `{colorSpace: 'display-p3'}` (or `'srgb'` for sRGB photos), then `toBlob('image/jpeg', 0.85)`.
     The colour profile is kept.
   - A re-encode was kept only if it saved at least 15%; otherwise the original file was used.
+  - To resize as well (the aisle photos were about 3000px), use
+    `createImageBitmap(img, sx, sy, sw, sh, {resizeWidth, resizeHeight, resizeQuality: 'high'})`
+    and draw that onto the canvas.
 
 ## Later (clean-up, not blocking launch)
 
@@ -343,3 +372,7 @@ For the design doc, run the same command from `design-system/`.
    Photography. Check permission and add a credit.
 8. Nav and footer links have no visible `:focus-visible` style beyond the browser default.
    Add one in the brand colours, like the menu button's grape outline.
+9. **The welcome board photos were supplied only 900px wide** (they look WhatsApp-compressed).
+   The 5:4 card crop is 900×720, against the 1250×1000 asked for, so it's a little soft on
+   retina desktops and tablets. Ask Nina for the originals straight from her phone, and swap
+   them in at the same file names.

@@ -257,7 +257,7 @@ Everything you need to dress your ceremony and reception, all in one simple pack
 
 **£495 for the day** [small text next to it: (introductory price)]
 
-[Keep the existing photo cards for each item. Use these captions. The welcome board photo will be supplied later]
+[Keep the existing photo cards for each item. Use these captions. Each card's photo opens larger when clicked]
 
 - 1 floral arch for your ceremony
 - 5 table centrepieces
@@ -289,7 +289,7 @@ Every venue is different, so once you get in touch we'll have a chat about timin
 
 Got a bigger guest list or a larger venue? You can add extra pieces to your package, all in the same soft whites, creams and greenery:
 
-[Show as a simple price list: item on the left, price on the right]
+[Show as cards in a grid: a square photo, then the item, then the price. Four across on desktop, two across on tablets and phones]
 
 | Add-on | Price |
 |---|---|
@@ -304,7 +304,7 @@ Just mention what you'd like when you get in touch, and I'll include it in your 
 
 [Button, links to index.html#contact] Add to my enquiry
 
-[Photo placeholders: leave space for a small photo beside each add-on. Photos will be supplied later.]
+[Each card's photo opens larger when clicked. The aisle arrangement photos are in; the other three add-ons show a placeholder until their photos are supplied.]
 
 #### 7. Bespoke floral styling (`id="bespoke"`)
 
