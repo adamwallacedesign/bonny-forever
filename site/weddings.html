@@ -157,18 +157,22 @@
       <p class="lead">Got a bigger guest list or a larger venue? You can add extra pieces to your package, all in the same soft whites, creams and greenery:</p>
     </div>
     <!-- Each card: name, price, then the photo (shown first by CSS, so screen readers hear the
-         name before the "View larger" button). An add-on without a photo yet has a plain
-         placeholder in place of the button, so it isn't clickable. -->
+         name before the "View larger" button). The centrepiece and plinth cards reuse the
+         package photos. -->
     <ul class="addon-grid">
       <li class="addon-card">
         <h3 class="addon-name">Extra table centrepiece (low arrangement, vase included)</h3>
         <p class="addon-price">£25 each</p>
-        <span class="addon-photo"><span class="photo-placeholder" aria-hidden="true">Photo to come<small>1000 &times; 1000</small></span></span>
+        <button type="button" class="addon-photo" aria-label="View larger: Extra table centrepiece">
+          <img src="images/centrepiece-white-roses.jpg" alt="Low faux centrepiece of white roses, white daisies and greenery" width="1000" height="1000" loading="lazy"><span class="sig-zoom">View larger</span>
+        </button>
       </li>
       <li class="addon-card">
         <h3 class="addon-name">Statement plinth arrangement (stand included)</h3>
         <p class="addon-price">£50 each, or £80 for a pair</p>
-        <span class="addon-photo"><span class="photo-placeholder" aria-hidden="true">Photo to come<small>1000 &times; 1000</small></span></span>
+        <button type="button" class="addon-photo" aria-label="View larger: Statement plinth arrangement">
+          <img src="images/statement-plinth-white.jpg" alt="Statement faux arrangement of white roses, tall white spires and foliage" width="1000" height="1000" loading="lazy"><span class="sig-zoom">View larger</span>
+        </button>
       </li>
       <li class="addon-card">
         <h3 class="addon-name">Aisle arrangement</h3>
@@ -179,12 +183,10 @@
           <img src="images/aisle-arrangement-ivory-roses.jpg" alt="Low faux aisle arrangement of ivory roses, white cosmos, cream stocks and white sweet peas with trailing greenery" width="1200" height="1002" loading="lazy"><span class="sig-zoom">View larger</span>
         </button>
       </li>
-      <li class="addon-card">
-        <h3 class="addon-name">Moving pieces from your ceremony to your reception</h3>
-        <p class="addon-price">£50</p>
-        <span class="addon-photo"><span class="photo-placeholder" aria-hidden="true">Photo to come<small>1000 &times; 1000</small></span></span>
-      </li>
     </ul>
+    <!-- An add-on without a photo, shown as a line in the same style as "Delivery, setup and
+         collection" in the package -->
+    <p class="addon-line"><i aria-hidden="true"></i><span>Moving pieces from your ceremony to your reception</span> <span class="addon-line-price">£50</span></p>
     <p class="price-note">Just mention what you&rsquo;d like when you get in touch, and I&rsquo;ll include it in your quote.</p>
     <p class="price-note"><em>Only need a few pieces? Everything above can be hired on its own too. Just send me a message and I&rsquo;ll put together a quote.</em></p>
     <a href="index.html?enquiry=wedding#contact" class="btn btn-outline">Add to my enquiry</a>
